@@ -10,6 +10,8 @@ class Restaurant {
     private boolean isOpen;
     private int phoneNumber;
     private int rating;
+    private String city;
+    private int zipCode;
 
     public int getRestaurantId() {
         return restaurantId;
@@ -73,5 +75,21 @@ class Restaurant {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 }
