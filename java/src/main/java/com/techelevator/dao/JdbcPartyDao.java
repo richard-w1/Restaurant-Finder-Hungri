@@ -25,7 +25,7 @@ public class JdbcPartyDao implements PartyDao {
 
     public List<Party> findAll(long userId){
             List<Party> party = new ArrayList<>();
-            String sql = "SELECT * FROM group WHERE user_id = ?";
+            String sql = "SELECT * FROM groups WHERE user_id = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while(results.next()) {
                 party.add(mapRowToParty(results));
@@ -36,13 +36,13 @@ public class JdbcPartyDao implements PartyDao {
     public boolean create(Party party){
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "group_id";
-        String insertGroup = "insert into group (group_name,user_id,end_date,has_ended) values(?,?,?,?)";
+        String insertGroup = "insert into groups (event_name,user_id,end_date,has_ended) values(?,?,?,?)";
         boolean groupCreated = jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(insertGroup, new String[]{id_column});
             ps.setString(1, party.getName());
             ps.setInt(2, party.getHostId());
             ps.setTimestamp(3, party.getEndDate());
-            ps.setBoolean(3, party.isHasEnded());
+            ps.setBoolean(4, party.isHasEnded());
             return ps;
         }
         , keyHolder) == 1;
@@ -52,7 +52,7 @@ public class JdbcPartyDao implements PartyDao {
     private Party mapRowToParty(SqlRowSet rs) {
         Party party = new Party();
         party.setId(rs.getInt("group_id"));
-        party.setName(rs.getString("group_name"));
+        party.setName(rs.getString("event_name"));
         party.setHostId(rs.getInt("user_id"));
         party.setEndDate(rs.getTimestamp("end_date"));
         party.setHasEnded(rs.getBoolean("has_ended"));

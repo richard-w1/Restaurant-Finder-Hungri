@@ -6,15 +6,18 @@ import java.sql.Timestamp;
 public class PartyDTO {
 
 
-    @NotEmpty
+
     private int groupId;
-    @NotEmpty
+
     private int hostId;
     @NotEmpty
     private String eventName;
     @NotEmpty
-    private Timestamp endDate;
+    private String date;
     @NotEmpty
+    private String time;
+    private Timestamp endDate;
+
     private boolean hasEnded;
 
     public int getGroupId() {
@@ -42,11 +45,26 @@ public class PartyDTO {
     }
 
     public Timestamp getEndDate() {
+        endDate = java.sql.Timestamp.valueOf(date + " " + time);
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public boolean isHasEnded() {
