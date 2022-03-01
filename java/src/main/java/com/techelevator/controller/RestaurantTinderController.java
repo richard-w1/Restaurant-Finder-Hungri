@@ -29,6 +29,7 @@ public class RestaurantTinderController {
         party.setHostId(partyDTO.getHostId());
         party.setEndDate(partyDTO.getEndDate());
         party.setHasEnded(partyDTO.isHasEnded());
+        party.setLocation(partyDTO.getLocation());
 
         partyDao.create(party);
     }

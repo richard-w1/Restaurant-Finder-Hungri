@@ -17,8 +17,9 @@ public class PartyDTO {
     @NotEmpty
     private String time;
     private Timestamp endDate;
-
     private boolean hasEnded;
+    @NotEmpty
+    private String location;
 
     public int getGroupId() {
         return groupId;
@@ -58,7 +59,6 @@ public class PartyDTO {
     }
 
 
-
     public String getTime() {
         return time;
     }
@@ -73,5 +73,13 @@ public class PartyDTO {
 
     public void setHasEnded(boolean hasEnded) {
         this.hasEnded = hasEnded;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -36,13 +36,14 @@ public class JdbcPartyDao implements PartyDao {
     public boolean create(Party party){
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "group_id";
-        String insertGroup = "insert into groups (event_name,user_id,end_date,has_ended) values(?,?,?,?)";
+        String insertGroup = "insert into groups (event_name,user_id,end_date,has_ended,location) values(?,?,?,?,?)";
         boolean groupCreated = jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(insertGroup, new String[]{id_column});
             ps.setString(1, party.getName());
             ps.setInt(2, party.getHostId());
             ps.setTimestamp(3, party.getEndDate());
             ps.setBoolean(4, party.isHasEnded());
+            ps.setString(5, party.getLocation());
             return ps;
         }
         , keyHolder) == 1;
@@ -56,6 +57,7 @@ public class JdbcPartyDao implements PartyDao {
         party.setHostId(rs.getInt("user_id"));
         party.setEndDate(rs.getTimestamp("end_date"));
         party.setHasEnded(rs.getBoolean("has_ended"));
+        party.setLocation(rs.getString("location"));
         return party;
     }
 
