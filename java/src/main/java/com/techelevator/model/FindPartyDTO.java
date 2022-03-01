@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class FindAllPartyDTO {
+public class FindPartyDTO {
     private int userId;
 
     public int getUserId() {

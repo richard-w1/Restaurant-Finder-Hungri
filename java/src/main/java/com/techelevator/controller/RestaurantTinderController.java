@@ -1,17 +1,12 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.PartyDao;
-import com.techelevator.dao.UserDao;
 import com.techelevator.dao.RestaurantDao;
 import com.techelevator.model.*;
-import com.techelevator.security.jwt.TokenProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Part;
 import javax.validation.Valid;
 
 @CrossOrigin("http://localhost:3000")
@@ -40,10 +35,10 @@ public class RestaurantTinderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/find_groups", method = RequestMethod.POST)
-    public ResponseEntity<Party> getGroups(@Valid @RequestBody FindAllPartyDTO findGroups) {
-        return new ResponseEntity<Party>(partyDao.findAll(findGroups.getUserId()).get(0), null, HttpStatus.OK);
-
-
+    public ResponseEntity<FindPartyResponse> getGroups(@Valid @RequestBody FindPartyDTO findGroups) {
+        FindPartyResponse findPartyResponse = new FindPartyResponse();
+        findPartyResponse.setParties(partyDao.findAll(findGroups.getUserId()));
+        return new ResponseEntity<FindPartyResponse>(findPartyResponse, null, HttpStatus.OK);
     }
 
 }
