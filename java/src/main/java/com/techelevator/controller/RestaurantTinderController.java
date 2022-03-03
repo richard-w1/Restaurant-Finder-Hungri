@@ -39,7 +39,15 @@ public class RestaurantTinderController {
     public ResponseEntity<FindPartyResponse> getGroups(@Valid @RequestBody FindPartyDTO findGroups) {
         FindPartyResponse findPartyResponse = new FindPartyResponse();
         findPartyResponse.setParties(partyDao.findAll(findGroups.getUserId()));
-        return new ResponseEntity<FindPartyResponse>(findPartyResponse, null, HttpStatus.OK);
+        return new ResponseEntity<>(findPartyResponse, null, HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/find_restaurants", method = RequestMethod.POST)
+    public ResponseEntity<FindRestaurantResponse> getRestaurants(@Valid @RequestBody FindRestaurantDTO findRestaurants) {
+        FindRestaurantResponse findRestaurantResponse = new FindRestaurantResponse();
+        findRestaurantResponse.setRestaurants(restaurantDao.findRestaurant(findRestaurants.getLocation()));
+        return new ResponseEntity<>(findRestaurantResponse, null, HttpStatus.OK);
     }
 
 }

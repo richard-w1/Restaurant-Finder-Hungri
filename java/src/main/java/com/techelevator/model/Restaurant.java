@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-class Restaurant {
+public class Restaurant {
 
     private int restaurantId;
     private String name;
@@ -77,9 +77,7 @@ class Restaurant {
         this.rating = rating;
     }
 
-    public String getCity() {
-        return city;
-    }
+    public String getCity() { return city; }
 
     public void setCity(String city) {
         this.city = city;
