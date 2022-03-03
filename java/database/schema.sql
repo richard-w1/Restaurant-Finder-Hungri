@@ -28,7 +28,7 @@ CREATE TABLE "restaurants" (
 	"phone_number" bigint NOT NULL,
 	"rating" int NOT NULL,
 	"city" character varying NOT NULL,
-	"zip_code" int NOT NULL,
+	"zip_code" character varying NOT NULL,
 	CONSTRAINT "restaurants_pk" PRIMARY KEY ("restaurant_id")
 ) WITH (
   OIDS=FALSE
