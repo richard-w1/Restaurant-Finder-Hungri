@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.math.BigDecimal;
+
 public class Restaurant {
 
     private int restaurantId;
@@ -8,7 +10,7 @@ public class Restaurant {
     private String hoursOfOperation;
     private String type;
     private boolean isOpen;
-    private int phoneNumber;
+    private BigDecimal phoneNumber;
     private int rating;
     private String city;
     private int zipCode;
@@ -61,11 +63,11 @@ public class Restaurant {
         isOpen = open;
     }
 
-    public int getPhoneNumber() {
+    public BigDecimal getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(BigDecimal phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -49,5 +49,4 @@ public class RestaurantTinderController {
         findRestaurantResponse.setRestaurants(restaurantDao.findRestaurant(findRestaurants.getLocation()));
         return new ResponseEntity<>(findRestaurantResponse, null, HttpStatus.OK);
     }
-
 }
