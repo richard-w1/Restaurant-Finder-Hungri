@@ -1,0 +1,18 @@
+INSERT INTO restaurants(name, description, hours_of_operation, type, open, phone_number, rating, city, zip_code)
+VALUES ('First Watch','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','American','True','5555555555','4','Washington D.C.','20001'),
+('Gypsy Kitchen','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-TH 8:00am - 11:00pm F-Sun 12:00pm - 2:00am','Mediterranean','True','5555555555','4','Washington D.C.','20002'),
+('BusBoy and Poets','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','T-S 10:00am - 12:00am Mon Closed','American','True','5555555555','3','Silver Spring','20678'),
+('BJs Brewhouse','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','American','True','5555555555','4','Lanham','30047'),
+('Killer Wings','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','T-S 10:00am - 12:00am Mon Closed','American ','False','5555555555','3','Washington D.C.','20009'),
+('Ruths Chris','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-TH 8:00am - 11:00pm F-Sun 12:00pm - 2:00am','Upscale','True','5555555555','5','Silver Spring','20678'),
+('Supreme BBQ','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','BBQ','True','5555555555','4','Silver Spring','20678'),
+('El Cholos','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','T-S 10:00am - 12:00am Mon Closed','Mexican','True','5555555555','5','Washington D.C.','20009'),
+('Stout Burgers and Beers','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','American','True','5555555555','5','Lanham','30047'),
+('Rollypop','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','Sushi','True','5555555555','4','Silver Spring','20678'),
+('Spare Tire Kitchen & Tavern','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','T-S 10:00am - 12:00am Mon Closed','American','True','5555555555','3','Lanham','30047'),
+('Yard House','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','T-S 10:00am - 12:00am Mon Closed','American','False','5555555555','3','Georgetown','45307'),
+('Roscoes Chicken & Waffles','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','Southern','True','5555555555','4','Georgetown','45307'),
+('Olive Garden ','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-TH 8:00am - 11:00pm F-Sun 12:00pm - 2:00am','Italian','True','5555555555','4','Washington D.C.','20009'),
+('Le Diplomate','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','M-S 8:00am - 11:00pm Sun Closed','Italian','True','5555555555','5','Lanham','30047');
+
+
