@@ -1,3 +1,4 @@
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {Component} from 'react';
 import SearchForm from '../SearchForm/SearchForm';
