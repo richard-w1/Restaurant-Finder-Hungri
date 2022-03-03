@@ -16,13 +16,13 @@ import java.util.List;
 @Component
 public class JdbcPartyDao implements PartyDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public JdbcPartyDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
+    @Override
     public List<Party> findAll(long userId){
             List<Party> party = new ArrayList<>();
             String sql = "SELECT * FROM groups WHERE user_id = ?";
@@ -33,6 +33,7 @@ public class JdbcPartyDao implements PartyDao {
             return party;
     }
 
+    @Override
     public boolean create(Party party){
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "group_id";

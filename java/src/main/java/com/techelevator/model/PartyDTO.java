@@ -4,11 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import java.sql.Timestamp;
 
 public class PartyDTO {
-
-
-
     private int groupId;
-
     private int hostId;
     @NotEmpty
     private String eventName;
