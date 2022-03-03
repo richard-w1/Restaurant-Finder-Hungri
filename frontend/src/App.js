@@ -1,3 +1,4 @@
+import React from 'react';
 import Main from './Components/Main/Main'
 import Home from './Components/Home/Home'
 import {Provider} from 'react-redux'

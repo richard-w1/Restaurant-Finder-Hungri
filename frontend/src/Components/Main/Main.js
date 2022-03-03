@@ -1,3 +1,4 @@
+import React from 'react';
 import {Component} from 'react'
 import {Switch, Route, Redirect, Link} from 'react-router-dom'
 import Login from '../Login/Login'
