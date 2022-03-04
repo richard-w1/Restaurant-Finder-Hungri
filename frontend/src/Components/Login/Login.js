@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom'
 import {addToken, addUser} from '../../Redux/actionCreators'
 import {baseUrl} from '../../Shared/baseUrl'
 import axios from 'axios'
+import '../../style.css'
 
 
 
@@ -28,11 +29,7 @@ class Login extends Component {
 
     handleLogin = async () => {
         const data = { username: this.state.username, password: this.state.password };
-        
-
         const userWithToken = await axios.post(baseUrl + '/login', data)
-
-        
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
     }
@@ -46,7 +43,7 @@ class Login extends Component {
 
     render(){
         return(
-            <div>
+            <div class = "input">
                 <h1>Please Sign In</h1>
                 <label class="sr-only">Username</label>
                 <input

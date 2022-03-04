@@ -3,6 +3,8 @@ import axios from 'axios';
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import { baseUrl } from '../../Shared/baseUrl';
+import '../../style.css'
+
 
 const Register = (props) => {
 
@@ -18,7 +20,7 @@ const Register = (props) => {
     }
 
     return(
-        <div>
+        <div class = "input">
             <h1>Create Account</h1>
             <label class="sr-only">Username</label>
             <input

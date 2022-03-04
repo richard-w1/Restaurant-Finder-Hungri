@@ -18,9 +18,13 @@ class Home extends Component {
 
     render() {
         return(
-            <>
-                <SearchForm />
-            </>
+            <div class = "input" >
+                    <h1>Home</h1>
+                            <Link to="/SearchForm">Search Restaurants</Link>
+                            <Link to="/CreateGroup">Create an invite</Link>
+                            <Link to="/ViewGroup">See your existing events</Link>
+
+            </div>
         );
     }
 
