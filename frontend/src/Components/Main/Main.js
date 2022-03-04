@@ -39,14 +39,14 @@ class Main extends Component {
                 {this.props.token.token !== undefined ?
                         <div>
                             <Link to='/home'>Home | </Link>
-                            <Link to='/login' onClick={this.handleLogout}>logout</Link> 
+                            <Link to='/login' onClick={this.handleLogout}>Logout</Link> 
                             <Redirect to='/home'/>
 
                         </div>  
                     : 
                         <Link to='/login'>Home | </Link>
                 }
-                <Switch class = "input" >
+                <Switch>
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>

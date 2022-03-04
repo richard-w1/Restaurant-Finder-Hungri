@@ -67,13 +67,48 @@ class SearchForm extends Component {
             );
         }
         else {
-            var String = "";
-            for (var i=0; i < this.state.restaurants.length; i++){
-                    String += this.state.restaurants[i].name + "\n";
-            }
+            // var string = "";
+            // const results = [];
+            // for (var i=0; i < this.state.restaurants.length; i++){
+            //         results.push(this.state.restaurants[i].name);
+            // }
+            const restaurantNames = this.state.restaurants.map((d) => 
+                    <li key={d.name}>{d.name}</li>
+                );
+
             return (
                 <div>
-                    {String}
+                    <div class = "input">
+                    <h1>Search Restaurants</h1>
+                        <label class="sr-only">Enter City or Zip Code</label>
+                        <input
+                            type='text'
+                            id="location"
+                            name="location"
+                            class="form-control"
+                            v-model="user.username"
+                            placeholder='Enter City or Zip Code'
+                            onChange={this.handleInputChange}
+                            required
+                        />
+                        <button type='submit' onClick={this.handleSearch}>Search</button>
+    
+                    </div>
+
+                    <div>
+                    <ul>{restaurantNames}</ul>
+                    
+                    </div>
+
+                    <div>
+                        <Link to="/SearchForm">
+                            <button renderAs="button">
+                                <span>Back to Search</span>
+                            </button>
+                        </Link>
+                    </div>
+
+  
                 </div>
             )
         }

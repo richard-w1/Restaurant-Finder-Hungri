@@ -20,9 +20,21 @@ class Home extends Component {
         return(
             <div class = "input" >
                     <h1>Home</h1>
-                            <Link to="/SearchForm">Search Restaurants</Link>
-                            <Link to="/CreateGroup">Create an invite</Link>
-                            <Link to="/ViewGroup">See your existing events</Link>
+                    <Link to="/SearchForm">
+                        <button renderAs="button">
+                            <span>Search Restaurants</span>
+                        </button>
+                    </Link>
+                    <Link to="/CreateGroup">
+                        <button renderAs="button">
+                            <span>Create an Invite</span>
+                        </button>
+                    </Link>
+                    <Link to="/ViewGroup">
+                        <button renderAs="button">
+                            <span>See Your Existing Invitations</span>
+                        </button>
+                    </Link>
 
             </div>
         );
