@@ -35,7 +35,7 @@ public class RestaurantTinderController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/find_groups", method = RequestMethod.POST)
+    @RequestMapping(value = "/find_groups", method = RequestMethod.GET)
     public ResponseEntity<FindPartyResponse> getGroups(@Valid @RequestBody FindPartyDTO findGroups) {
         FindPartyResponse findPartyResponse = new FindPartyResponse();
         findPartyResponse.setParties(partyDao.findAll(findGroups.getUserId()));
@@ -43,7 +43,7 @@ public class RestaurantTinderController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/find_restaurants", method = RequestMethod.POST)
+    @RequestMapping(value = "/find_restaurants", method = RequestMethod.GET)
     public ResponseEntity<FindRestaurantResponse> getRestaurants(@Valid @RequestBody FindRestaurantDTO findRestaurants) {
         FindRestaurantResponse findRestaurantResponse = new FindRestaurantResponse();
         findRestaurantResponse.setRestaurants(restaurantDao.findRestaurant(findRestaurants.getLocation()));
