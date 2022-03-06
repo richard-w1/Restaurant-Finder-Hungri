@@ -38,9 +38,10 @@ public class RestaurantTinderController {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
+        this.partyDao = partyDao;
         this.restaurantDao = restaurantDao;
         this.groupVotesDao = groupVotesDao;
-}
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/create_group", method = RequestMethod.POST)
@@ -55,7 +56,7 @@ public class RestaurantTinderController {
         party.setLocation(partyDTO.getLocation());
 
         partyDao.create(party);
-     }
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/find_groups/{token}", method = RequestMethod.GET)
