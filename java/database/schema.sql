@@ -56,6 +56,7 @@ CREATE TABLE "group_members" (
 	"member_name" character varying NOT NULL,
 	"member_url" character varying NOT NULL,
 	"group_id" int NOT NULL,
+	"user_vote" int NOT NULL,
 	CONSTRAINT "group_members_pk" PRIMARY KEY ("member_id")
 ) WITH (
   OIDS=FALSE
@@ -64,7 +65,7 @@ CREATE TABLE "group_votes" (
 	"group_id" bigint NOT NULL,
 	"member_id" bigint NOT NULL,
 	"restaurant_id" bigint NOT NULL,
-	"vote" int NOT NULL
+	"total_votes" int NOT NULL
 ) WITH (
   OIDS=FALSE
 );
