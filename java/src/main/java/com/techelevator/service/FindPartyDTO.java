@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.service;
 
 public class FindPartyDTO {
     private int userId;

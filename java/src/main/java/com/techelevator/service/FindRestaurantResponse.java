@@ -1,4 +1,6 @@
-package com.techelevator.model;
+package com.techelevator.service;
+
+import com.techelevator.model.Restaurant;
 
 import java.util.List;
 
