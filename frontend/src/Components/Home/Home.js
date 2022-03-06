@@ -29,7 +29,7 @@ class Home extends Component {
                     </Link>
                     <Link to="/CreateGroup">
                         <button renderAs="button">
-                            <span>Create an Invite</span>
+                            <span>Create an Invitation</span>
                         </button>
                     </Link>
                     <Link to="/ViewGroup">
