@@ -9,7 +9,6 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
 
-
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL,
@@ -56,6 +55,7 @@ CREATE TABLE "group_members" (
 	"member_name" character varying NOT NULL,
 	"member_url" character varying NOT NULL,
 	"group_id" int NOT NULL,
+	"user_vote" int NOT NULL,
 	CONSTRAINT "group_members_pk" PRIMARY KEY ("member_id")
 ) WITH (
   OIDS=FALSE
@@ -64,7 +64,7 @@ CREATE TABLE "group_votes" (
 	"group_id" bigint NOT NULL,
 	"member_id" bigint NOT NULL,
 	"restaurant_id" bigint NOT NULL,
-	"vote" int NOT NULL
+	"total_votes" int NOT NULL
 ) WITH (
   OIDS=FALSE
 );
@@ -79,6 +79,5 @@ ALTER TABLE "group_votes" ADD CONSTRAINT "group_votes_fk2" FOREIGN KEY ("restaur
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
-
 
 COMMIT TRANSACTION;

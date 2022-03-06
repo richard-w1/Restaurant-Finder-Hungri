@@ -1,4 +1,4 @@
 package com.techelevator.services;
 
-public interface RestaurantService {
+public class RestInviteServices {
 }

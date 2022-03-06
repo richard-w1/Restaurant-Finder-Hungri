@@ -1,9 +1,13 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.GroupVotesDao;
 import com.techelevator.dao.PartyDao;
 import com.techelevator.dao.RestaurantDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.*;
+import com.techelevator.service.FindGroupVotesResponse;
+import com.techelevator.service.FindPartyResponse;
+import com.techelevator.service.FindRestaurantResponse;
 import com.techelevator.security.jwt.TokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +27,7 @@ public class RestaurantTinderController {
 
     PartyDao partyDao;
     RestaurantDao restaurantDao;
+    GroupVotesDao groupVotesDao;
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -32,8 +37,12 @@ public class RestaurantTinderController {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
+    public RestaurantTinderController(PartyDao partyDao, RestaurantDao restaurantDao, GroupVotesDao groupVotesDao) {
         this.partyDao = partyDao;
     }
+        this.restaurantDao = restaurantDao;
+        this.groupVotesDao = groupVotesDao;
+}
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/create_group", method = RequestMethod.POST)
@@ -66,5 +75,13 @@ public class RestaurantTinderController {
         FindRestaurantResponse findRestaurantResponse = new FindRestaurantResponse();
         findRestaurantResponse.setRestaurants(restaurantDao.findRestaurant(location));
         return new ResponseEntity<>(findRestaurantResponse, null, HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/view-finalists", method = RequestMethod.GET)
+    public ResponseEntity<FindGroupVotesResponse> getGroupVotes(@PathVariable int groupId) {
+        FindGroupVotesResponse findGroupVotesResponse = new FindGroupVotesResponse();
+        findGroupVotesResponse.setGroupVotes(groupVotesDao.retrieveVotes(groupId));
+        return new ResponseEntity<>(findGroupVotesResponse, null, HttpStatus.OK);
     }
 }
