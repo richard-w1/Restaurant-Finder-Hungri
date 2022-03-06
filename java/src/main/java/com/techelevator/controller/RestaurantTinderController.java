@@ -33,13 +33,11 @@ public class RestaurantTinderController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
 
-    public RestaurantTinderController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, PartyDao partyDao) {
+    public RestaurantTinderController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder,
+                                      UserDao userDao, PartyDao partyDao, RestaurantDao restaurantDao, GroupVotesDao groupVotesDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
-    public RestaurantTinderController(PartyDao partyDao, RestaurantDao restaurantDao, GroupVotesDao groupVotesDao) {
-        this.partyDao = partyDao;
-    }
         this.restaurantDao = restaurantDao;
         this.groupVotesDao = groupVotesDao;
 }
