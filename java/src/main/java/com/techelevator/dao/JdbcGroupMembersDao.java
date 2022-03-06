@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.GroupMembers;
+import com.techelevator.model.Restaurant;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -18,17 +19,6 @@ public class JdbcGroupMembersDao implements GroupMembersDao{
         }
 
 
-//        public List<Restaurant> findRestaurant(String location) {
-//            List<Restaurant> restaurant = new ArrayList<>();
-//            String sql = "SELECT * FROM restaurants WHERE city LIKE ? OR zip_code LIKE ?";
-//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, location, location);
-//            while(results.next()) {
-//                restaurant.add(mapRowToRestaurant(results));
-//            }
-//            return restaurant;
-//
-//        }
-
         private GroupMembers mapRowToGroupMembers(SqlRowSet rs) {
             GroupMembers groupMembers = new GroupMembers();
             groupMembers.setMember_id(rs.getInt("member_id"));
@@ -39,6 +29,19 @@ public class JdbcGroupMembersDao implements GroupMembersDao{
             return groupMembers;
         }
 
+    @Override
+    public List<GroupMembers> findByGroupId(int groupId) {
+        return null;
     }
 
-    //}
+    @Override
+    public GroupMembers createVote(int member_id, String member_name, String member_url, int group_id, int user_vote) {
+        return null;
+    }
+
+    @Override
+    public List<Restaurant> sendListToGroupByGroupId(int groupId) {
+        return null;
+    }
+}
+
