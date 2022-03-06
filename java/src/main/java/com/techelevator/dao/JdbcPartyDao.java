@@ -1,7 +1,9 @@
 package com.techelevator.dao;
 
 import com.techelevator.controller.RestaurantTinderController;
+import com.techelevator.model.GroupMembers;
 import com.techelevator.model.Party;
+import com.techelevator.model.Restaurant;
 import com.techelevator.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +59,30 @@ public class JdbcPartyDao implements PartyDao {
         }
         , keyHolder) == 1;
         return groupCreated;
+    }
+
+
+    public boolean populateRestaurantGroupTable(){
+        return null;
+    }
+
+    @Override
+    public List<Party> showUsersByGroupId(int Id) {
+            List<Party> groupMembersList = new ArrayList<>();
+            String sql = "Select member_name, member_id, user_vote from group_members where group_id = ?";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Id);
+            while (results.next()) {
+                groupMembersList.add(mapRowToParty(results));
+            }
+            return groupMembersList;
+        }
+
+    @Override
+    public List<Restaurant> sendRestaurantListByGroupId(int groupId) {
+        List<Restaurant> restaurantList = new ArrayList<>();
+        String sql = ""
+        return null;
+
     }
 
     private int getIdByUserId(String userId){

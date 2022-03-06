@@ -21,7 +21,13 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 
     @Override
     public List<GroupMembers> findByGroupId(int groupId) {
-        return null;
+        List<GroupMembers> groupMembersList = new ArrayList<>();
+        String sql = "Select member_name, member_id, user_vote from group_members where group_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, groupId);
+        while (results.next()) {
+            groupMembersList.add(mapRowToGroupMembers(results));
+        }
+        return groupMembersList;
     }
 
     @Override

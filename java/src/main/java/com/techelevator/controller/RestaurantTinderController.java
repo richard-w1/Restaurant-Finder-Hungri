@@ -81,6 +81,5 @@ public class RestaurantTinderController {
     public ResponseEntity<FindGroupVotesResponse> getGroupVotes(@PathVariable int groupId) {
         FindGroupVotesResponse findGroupVotesResponse = new FindGroupVotesResponse();
         findGroupVotesResponse.setGroupVotes(groupVotesDao.retrieveVotes(groupId));
-        return new ResponseEntity<>(findGroupVotesResponse, null, HttpStatus.OK);
-    }
+        return new ResponseEntity<>(findGroupVotesResponse, null, HttpStatus.OK);}
 }
