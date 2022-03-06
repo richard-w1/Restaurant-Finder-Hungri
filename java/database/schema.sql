@@ -9,7 +9,6 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
 
-
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL,
@@ -80,6 +79,5 @@ ALTER TABLE "group_votes" ADD CONSTRAINT "group_votes_fk2" FOREIGN KEY ("restaur
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
-
 
 COMMIT TRANSACTION;
