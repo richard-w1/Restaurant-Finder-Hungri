@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PartyDao {
 
-    List<Party> findAll(long userId);
+    List<Party> findAll(String token);
 
     boolean create(Party party);
 

@@ -17,6 +17,8 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.props.token);
+
         return(
             <div class = "input" >
                     <h1>Home</h1>

@@ -55,7 +55,7 @@ const Register = (props) => {
                 required
             />
             <Link to="/login">Have an account?</Link>
-            <button type="submit" onClick={handleSubmit}>Sign in</button>
+            <button type="submit" onClick={handleSubmit}>Register</button>
         </div>
     )
 }

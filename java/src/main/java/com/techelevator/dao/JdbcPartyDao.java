@@ -1,7 +1,10 @@
 package com.techelevator.dao;
 
+import com.techelevator.controller.RestaurantTinderController;
 import com.techelevator.model.Party;
 import com.techelevator.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @Component
 public class JdbcPartyDao implements PartyDao {
+    private final Logger log = LoggerFactory.getLogger(JdbcPartyDao.class);
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -23,14 +27,18 @@ public class JdbcPartyDao implements PartyDao {
     }
 
     @Override
-    public List<Party> findAll(long userId){
-            List<Party> party = new ArrayList<>();
-            String sql = "SELECT * FROM groups WHERE user_id = ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-            while(results.next()) {
-                party.add(mapRowToParty(results));
-            }
-            return party;
+    public List<Party> findAll(String username){
+        log.info("findAll for: " + username);
+        List<Party> party = new ArrayList<>();
+        String sql = "SELECT * FROM groups WHERE user_id = ?";
+        int userId = getIdByUserId(username);
+        log.info("found user_id:" + userId);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while(results.next()) {
+            log.info("Found Group: " + results.getString("event_name"));
+            party.add(mapRowToParty(results));
+        }
+        return party;
     }
 
     @Override
@@ -41,7 +49,7 @@ public class JdbcPartyDao implements PartyDao {
         boolean groupCreated = jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(insertGroup, new String[]{id_column});
             ps.setString(1, party.getName());
-            ps.setInt(2, party.getHostId());
+            ps.setInt(2, getIdByUserId(party.getUserId()));
             ps.setTimestamp(3, party.getEndDate());
             ps.setBoolean(4, party.isHasEnded());
             ps.setString(5, party.getLocation());
@@ -49,6 +57,15 @@ public class JdbcPartyDao implements PartyDao {
         }
         , keyHolder) == 1;
         return groupCreated;
+    }
+
+    private int getIdByUserId(String userId){
+        String sql = "SELECT * FROM users WHERE username = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if(results.next()){
+            return results.getInt("user_id");
+        }
+        return 0;
     }
 
     private Party mapRowToParty(SqlRowSet rs) {

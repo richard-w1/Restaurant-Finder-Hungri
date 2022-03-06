@@ -1,4 +1,4 @@
 package com.techelevator.model;
 
-public class RestarauntGroup {
+public class RestaurantGroup {
 }

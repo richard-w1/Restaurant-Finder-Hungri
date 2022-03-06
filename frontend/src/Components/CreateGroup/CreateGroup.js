@@ -5,77 +5,91 @@ import {withRouter} from 'react-router-dom'
 import {addToken, addUser} from '../../Redux/actionCreators'
 import {baseUrl} from '../../Shared/baseUrl'
 import axios from 'axios'
+import { StaticRouter } from 'react-router-dom'
+import { Token } from '../../Redux/token'
 
 
-// const [eventName, setEventName] = useState("");
-// const [location, setLocation] = useState("");
-// const [date, setDate] = useState("");
-// const [time, setTime] = useState("");
-// const [userId, setUserId] = useState("");
+export default class CreateGroup extends Component{
 
-// const handleSubmit = () => {
-//     const data = {
-//         "hostId": 3, //TODO: set to 3 for now, should be whoever is logged in
-//         "eventName" : eventName,
-//         "date": date,
-//         "time": time,
-//         "hasEnded": false,
-//         "location": location}
-//         axios.post(baseUrl + "/create_group", data)
-// }
+    constructor(props){
+        super(props);
 
-const CreateGroup = (props) => {
+           console.log(this.props);
+
+        this.state = {
+            eventName: '',
+            endDate: '',
+            endTime: '',
+            location: '',
+            hostId: ''            
+        }
+    }
+
+    handleSubmit = () => {
+        const data = {eventName: this.state.eventName, 
+            date: this.state.endDate, 
+            time: this.state.endTime, 
+            location: this.state.location, 
+            token: this.props.token
+        }
+        console.log(data)
+        axios.post(baseUrl + "/create_group", data)
+        }
+
+render (){
     return(
-
-        <div>
+        <div class = 'input'>
         <h1>Invite your friends!</h1>
-        {/* <h1>Event Details:</h1>
+            <h1>Event Details:</h1>
             <label class="sr-only">Event Name</label>
             <input
                 type="text"
-                id="event_name"
-                name="event_name"
+                id="eventName"
+                name="eventName"
                 class="form-control"
-                placeholder="event_name"
-                onChange={(e) => setEventName(e.target.value)}
+                placeholder="Name of event"
+                onChange={(e) => this.state.eventName = (e.target.value)}
                 required
             />
 
             <label class="sr-only">City or Zip Code</label>
             <input
                 type="text"
-                id="event_name"
-                name="event"
+                id="location"
+                name="location"
                 class="form-control"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="City or Zip Code"
+                onChange={(e) => this.state.location = (e.target.value)}
                 required
             />
 
             <h1>Voting Expires:</h1>
             <label class="sr-only">Date</label>
             <input
-                type="text"
-                id="event_name"
-                name="event"
+                type="date"
+                id="setEndDate"
+                name="setEndDate"
                 class="form-control"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Date"
+                onChange={(e) => this.state.endDate = (e.target.value)}
                 required
             />
 
             <label class="sr-only">Time</label>
             <input
-                type="text"
-                id="event_name"
-                name="event"
+                type="time"
+                id="endTime"
+                name="endTime"
                 class="form-control"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Time"
+                onChange={(e) => this.state.endTime = (e.target.value)}
                 required
-            /> */}
+            />
+            <button type="submit" onClick={this.handleSubmit}>Create Invitation</button>
+
             </div>
     )
 }
+}
 
-export default CreateGroup;
+// export default CreateGroup;

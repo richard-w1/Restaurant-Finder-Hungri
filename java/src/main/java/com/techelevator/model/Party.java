@@ -9,6 +9,7 @@ public class Party {
     private boolean hasEnded;
     private int hostId;
     private String location;
+    private String userId;
 
     public int getId() {
         return id;
@@ -56,5 +57,13 @@ public class Party {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

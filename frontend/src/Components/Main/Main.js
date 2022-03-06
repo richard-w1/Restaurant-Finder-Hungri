@@ -49,10 +49,10 @@ class Main extends Component {
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
-                    <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
+                    <Route path='/home' component={this.props.token.token !== undefined ? () => <Home token = {this.props.token.token}/> : null}/>
                     <Route path='/SearchForm'component={() => <SearchForm/>}/>
-                    <Route path='/CreateGroup'component={() => <CreateGroup/>}/>
-                    <Route path='/ViewGroup'component={() => <ViewGroup/>}/>
+                    <Route path='/CreateGroup'component={() => <CreateGroup token = {this.props.token.token}/>}/>
+                    <Route path='/ViewGroup'component={() => <ViewGroup token = {this.props.token.token}/>}/>
 
                     <Redirect to='/login'/>
                 </Switch>

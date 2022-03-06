@@ -2,6 +2,9 @@ package com.techelevator.model;
 
 import javax.validation.constraints.NotEmpty;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class PartyDTO {
     private int groupId;
@@ -16,6 +19,8 @@ public class PartyDTO {
     private boolean hasEnded;
     @NotEmpty
     private String location;
+    @NotEmpty
+    private String token;
 
     public int getGroupId() {
         return groupId;
@@ -42,7 +47,10 @@ public class PartyDTO {
     }
 
     public Timestamp getEndDate() {
-        endDate = java.sql.Timestamp.valueOf(date + " " + time);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+//        LocalDateTime localdt = LocalDateTime.parse(date + " " + time, formatter);
+//        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        endDate = java.sql.Timestamp.valueOf(date + " " + time + ":00");
         return endDate;
     }
 
@@ -53,7 +61,6 @@ public class PartyDTO {
     public void setDate(String date) {
         this.date = date;
     }
-
 
     public String getTime() {
         return time;
@@ -77,5 +84,13 @@ public class PartyDTO {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

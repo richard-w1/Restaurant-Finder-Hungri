@@ -32,6 +32,7 @@ class Login extends Component {
         const userWithToken = await axios.post(baseUrl + '/login', data)
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
+        console.log(this.props);
     }
 
     handleInputChange = (event) => {
