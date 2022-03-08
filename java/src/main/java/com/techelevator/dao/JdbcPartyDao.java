@@ -7,6 +7,7 @@ import com.techelevator.model.Restaurant;
 import com.techelevator.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -61,10 +62,27 @@ public class JdbcPartyDao implements PartyDao {
         return groupCreated;
     }
 
+    @Override
+    public Party findPartyById(int groupId) {
+        Party party = null;
 
-    public boolean populateRestaurantGroupTable(){
-        return null;
+        try {
+            String sql = "SELECT group_id FROM groups WHERE group_id = ?";
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, groupId);
+
+            if(result.next()) {
+                party = mapRowToParty(result);
+            }
+        } catch (DataAccessException e) {
+            System.out.println("Error Accessing Data.");
+        }
+
+        return party;
     }
+
+    //    public boolean populateRestaurantGroupTable(){
+//        return null;
+//    }
 
     @Override
     public List<Party> showUsersByGroupId(int Id) {
@@ -77,15 +95,7 @@ public class JdbcPartyDao implements PartyDao {
             return groupMembersList;
         }
 
-    @Override
-    public List<Restaurant> sendRestaurantListByGroupId(int groupId) {
-        List<Restaurant> restaurantList = new ArrayList<>();
-        String sql = ""
-        return null;
-
-    }
-
-    private int getIdByUserId(String userId){
+    public int getIdByUserId(String userId){
         String sql = "SELECT * FROM users WHERE username = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         if(results.next()){
@@ -93,6 +103,8 @@ public class JdbcPartyDao implements PartyDao {
         }
         return 0;
     }
+
+
 
     private Party mapRowToParty(SqlRowSet rs) {
         Party party = new Party();

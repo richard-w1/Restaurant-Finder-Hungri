@@ -13,10 +13,11 @@ public interface PartyDao {
 
     boolean create(Party party);
 
+    Party findPartyById(int groupId);
+
     List<Party> showUsersByGroupId(int Id);
 
-    List<Restaurant> sendRestaurantListByGroupId(int groupId);
-
+    int getIdByUserId(String userId);
     //Do we need to retrieve a list of parties?
     //Do we need to CRUD parties?
 }

@@ -1,9 +1,6 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.GroupVotesDao;
-import com.techelevator.dao.PartyDao;
-import com.techelevator.dao.RestaurantDao;
-import com.techelevator.dao.UserDao;
+import com.techelevator.dao.*;
 import com.techelevator.model.*;
 import com.techelevator.service.FindGroupVotesResponse;
 import com.techelevator.service.FindPartyResponse;
@@ -11,7 +8,6 @@ import com.techelevator.service.FindRestaurantResponse;
 import com.techelevator.security.jwt.TokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,19 +24,21 @@ public class RestaurantTinderController {
     PartyDao partyDao;
     RestaurantDao restaurantDao;
     GroupVotesDao groupVotesDao;
+    RestaurantGroupDao restaurantGroupDao;
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
 
     public RestaurantTinderController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder,
-                                      UserDao userDao, PartyDao partyDao, RestaurantDao restaurantDao, GroupVotesDao groupVotesDao) {
+                                      UserDao userDao, PartyDao partyDao, RestaurantDao restaurantDao, GroupVotesDao groupVotesDao, RestaurantGroupDao restaurantGroupDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
         this.partyDao = partyDao;
         this.restaurantDao = restaurantDao;
         this.groupVotesDao = groupVotesDao;
+        this.restaurantGroupDao = restaurantGroupDao;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -56,6 +54,7 @@ public class RestaurantTinderController {
         party.setLocation(partyDTO.getLocation());
 
         partyDao.create(party);
+        restaurantGroupDao.addDataToRestaurantGroup(party);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -40,7 +40,7 @@ public class JdbcGroupVotesDao implements GroupVotesDao{
 
         groupVotes.setGroupId(result.getInt("group_id"));
         groupVotes.setRestaurantId(result.getInt("restaurant_id"));
-        groupVotes.setVotes(result.getInt("total_votes"));
+        groupVotes.setVotes(result.getInt("total_votes`"));
 
         return groupVotes;
     }
