@@ -35,10 +35,6 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
         return null;
     }
 
-    @Override
-    public List<Restaurant> sendListToGroupByGroupId(int groupId) {
-        return null;
-    }
 
     private GroupMembers mapRowToGroupMembers(SqlRowSet rs) {
         GroupMembers groupMembers = new GroupMembers();

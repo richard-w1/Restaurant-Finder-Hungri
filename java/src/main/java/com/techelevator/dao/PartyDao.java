@@ -11,7 +11,7 @@ public interface PartyDao {
 
     List<Party> findAll(String token);
 
-    boolean create(Party party);
+    int create(Party party);
 
     Party findPartyById(int groupId);
 

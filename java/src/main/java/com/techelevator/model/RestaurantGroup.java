@@ -4,6 +4,15 @@ public class RestaurantGroup {
 
     private int groupId;
     private int restaurantId;
+    private int totalVotes;
+
+    public int getTotalVotes() {
+        return totalVotes;
+    }
+
+    public void setTotalVotes(int totalVotes) {
+        this.totalVotes = totalVotes;
+    }
 
     public int getGroupId() {
         return groupId;

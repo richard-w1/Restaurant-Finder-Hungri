@@ -35,4 +35,9 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
         return true;
     }
 
+    @Override
+    public List<Restaurant> sendListToGroupByGroupId(int groupId) {
+        return null;
+    }
+
 }

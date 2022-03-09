@@ -45,7 +45,7 @@ public class JdbcPartyDao implements PartyDao {
     }
 
     @Override
-    public boolean create(Party party){
+    public int create(Party party){
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "group_id";
         String insertGroup = "insert into groups (event_name,user_id,end_date,has_ended,location) values(?,?,?,?,?)";
@@ -59,7 +59,8 @@ public class JdbcPartyDao implements PartyDao {
             return ps;
         }
         , keyHolder) == 1;
-        return groupCreated;
+        return keyHolder.getKey().intValue();
+        //return groupCreated;
     }
 
     @Override

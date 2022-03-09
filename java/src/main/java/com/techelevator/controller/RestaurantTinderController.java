@@ -53,7 +53,8 @@ public class RestaurantTinderController {
         party.setHasEnded(partyDTO.isHasEnded());
         party.setLocation(partyDTO.getLocation());
 
-        partyDao.create(party);
+        int key = partyDao.create(party);
+        party.setId(key);
         restaurantGroupDao.addDataToRestaurantGroup(party);
     }
 
