@@ -1,7 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.GroupMembers;
-import com.techelevator.model.Restaurant;
+import com.techelevator.model.RestaurantGroup;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -31,14 +31,20 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
     }
 
     @Override
-    public GroupMembers createVote(int member_id, String member_name, String member_url, int group_id, int user_vote) {
+    public int createVote(GroupMembers groupMembers) {
+        return 0;
+    }
+
+    @Override
+    public List<RestaurantGroup> sendListOfRestaurants(int groupId) {
         return null;
     }
 
     @Override
-    public List<Restaurant> sendListToGroupByGroupId(int groupId) {
+    public GroupMembers createVote(int member_id, String member_name, String member_url, int group_id, int user_vote) {
         return null;
     }
+
 
     private GroupMembers mapRowToGroupMembers(SqlRowSet rs) {
         GroupMembers groupMembers = new GroupMembers();
