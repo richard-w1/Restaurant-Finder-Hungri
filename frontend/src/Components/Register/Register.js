@@ -4,6 +4,8 @@ import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import { baseUrl } from '../../Shared/baseUrl';
 import '../../style.css'
+import Card from '../UI/Card'
+import classes from './Register.module.css'
 
 
 const Register = (props) => {
@@ -20,8 +22,11 @@ const Register = (props) => {
     }
 
     return(
+        <section> 
         <div class = "input">
             <h1>Create Account</h1>
+            <div className={classes.registercard}>
+            <Card>
             <label class="sr-only">Username</label>
             <input
                 type="text"
@@ -56,7 +61,10 @@ const Register = (props) => {
             />
             <Link to="/login">Have an account?</Link>
             <button type="submit" onClick={handleSubmit}>Register</button>
+            </Card>
+            </div>
         </div>
+        </section>
     )
 }
 

@@ -1,6 +1,14 @@
 .input {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    max-width: 250px ;
+    justify-content: center;
+    max-width: 250px;
+
+  }
+
+  .login{
+    background-color: rgb(138, 14, 14);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 75px;
   }

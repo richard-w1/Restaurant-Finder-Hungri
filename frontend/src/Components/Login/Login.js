@@ -7,6 +7,8 @@ import {addToken, addUser} from '../../Redux/actionCreators'
 import {baseUrl} from '../../Shared/baseUrl'
 import axios from 'axios'
 import '../../style.css'
+import Card from '../UI/Card'
+import classes from '../UI/Card.module.css'
 
 
 
@@ -45,7 +47,8 @@ class Login extends Component {
     render(){
         return(
             <div class = "input">
-                <h1>Please Sign In</h1>
+                <h1>Please Sign In</h1> 
+                <Card>
                 <label class="sr-only">Username</label>
                 <input
                     type="text"
@@ -70,6 +73,7 @@ class Login extends Component {
                 />
                 <Link to="/register">Need an account?</Link>
                 <button type="submit" onClick={this.handleLogin}>Sign in</button>
+                </Card>
             </div>
         )
     }
