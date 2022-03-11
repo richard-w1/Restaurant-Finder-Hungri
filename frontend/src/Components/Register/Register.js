@@ -22,7 +22,7 @@ const Register = (props) => {
     }
 
     return(
-        <section> 
+        <div class='body'> 
         <div class = "input">
             <h1>Create Account</h1>
             <div className={classes.registercard}>
@@ -64,7 +64,7 @@ const Register = (props) => {
             </Card>
             </div>
         </div>
-        </section>
+        </div>
     )
 }
 
