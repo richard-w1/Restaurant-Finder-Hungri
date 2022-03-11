@@ -9,7 +9,7 @@ import axios from 'axios'
 import SearchResults from '../SearchResults/SearchResults';
 import '../../style.css'
 import Card from '../UI/Card'
-
+import classes from './SearchForm.module.css'
 
 
 class SearchForm extends Component {
@@ -98,11 +98,12 @@ class SearchForm extends Component {
                     </div>
 
                     <div>
-                        <Card>
-                            <ul>{restaurantNames}</ul>
-                        </Card>
+                        <div className={classes.restaurantCard}>
+                            <Card>
+                                <ul>{restaurantNames}</ul>
+                            </Card>
+                        </div>
                     </div>
-
                     <div>
                         <Link to="/SearchForm">
                             <button renderAs="button">
