@@ -11,6 +11,7 @@ import Splash from '../Splash/Splash';
 import { addToken, deleteUser } from '../../Redux/actionCreators'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Header from '../UI/Header';
 
 
 const mapStateToProps = state => {
@@ -36,27 +37,23 @@ class Main extends Component {
     }
 
     render() {
+        console.log(this.props.token);
         return (
-
             <div>
-                {this.props.token.token !== undefined ?
-                        <div>
-                            <Link to='/home'>Home | </Link>
-                            <Link to='/login' onClick={this.handleLogout}>Logout</Link>
-                            <Redirect to='/home' />
-                        </div> :
-                <Link to='/login'>Home | </Link>
-                }
+  <Header token={this.props.token} />
+            
+            <div>
                 <Switch>
                     <Route path='/login' component={() => <Login />} />
                     <Route path='/register' component={() => <Register />} />
-                    <Route path='/home' component={this.props.token.token !== undefined ? () => <Home token={this.props.token.token} /> : null} />
+                    <Route path='/home' component={this.props.token.token !== undefined ? () => <Home token={this.props.token.token} /> : () => <Splash/>} />
                     <Route path='/SearchForm' component={() => <SearchForm />} />
                     <Route path='/CreateGroup' component={() => <CreateGroup token={this.props.token.token} />} />
                     <Route path='/ViewGroup' component={() => <ViewGroup token={this.props.token.token} />} />
                     <Route path='/Splash' component={() => <Splash />} />
                     <Redirect to='/Splash' />
                 </Switch>
+            </div>
             </div>
         )
     }

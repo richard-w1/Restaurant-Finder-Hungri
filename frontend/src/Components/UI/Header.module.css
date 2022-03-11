@@ -1,16 +1,16 @@
 .header {
-    width: 100%;
+    width: 100% - 100px;
     height: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #BCC99B;
-    padding: 0 10%;
+    padding: 0px 100px 0px 100px ;
   }
   
   .logo {
     font-size: 2rem;
-    color: white;
+    color: #E3686B;
     font-weight: bold;
   }
   
@@ -29,7 +29,7 @@
   .header a {
     text-decoration: none;
     font-size: 1.5rem;
-    color: #ffffff;
+    color: #E3686B;
   }
   
   .header a:hover,
