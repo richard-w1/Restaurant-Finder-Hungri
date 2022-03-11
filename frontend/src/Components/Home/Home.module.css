@@ -1,0 +1,18 @@
+.logincard {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button {
+    font-size: 1rem;
+    padding: .5rem 1.1rem .4rem;
+    border: 1px solid;
+    border-radius: 1rem;
+    background: none;
+    color: #1B2121;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .button :hover {cursor: pointer;}

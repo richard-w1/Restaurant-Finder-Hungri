@@ -34,12 +34,23 @@ export default class CreateGroup extends Component{
         }
         console.log(data)
         axios.post(baseUrl + "/create_group", data)
+        .then(
+            (response) => {
+                document.getElementById('message').innerHTML = "Invitation successfully created.";
+            }
+        )
+        .catch(
+            (error) => {
+                console.error(error.response.data.message);
+                document.getElementById('message').innerHTML = error.response.data.message;
+            }
+        );
         }
 
 render (){
     return(
         <div class = 'input'>
-        <h1>Invite your friends!</h1>
+        <h1 class = 'header' >Invite your friends!</h1>
             <h1>Event Details:</h1>
             <label class="sr-only">Event Name</label>
             <input
@@ -86,7 +97,7 @@ render (){
                 required
             />
             <button type="submit" onClick={this.handleSubmit}>Create Invitation</button>
-
+            <div id = 'message'></div>
             </div>
     )
 }

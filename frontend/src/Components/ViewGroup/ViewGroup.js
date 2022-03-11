@@ -60,8 +60,8 @@ class ViewGroup extends Component {
         console.log(this.state);
         const groupInfo = this.generateList();
         return(
-            <div>
-                <h1>Your invitations</h1>
+            <div class = 'input'>
+                <h1 class = 'header'>Your invitations</h1>
                 <div id="group_list">
                 {groupInfo}
                 </div>
@@ -75,7 +75,6 @@ class ViewGroup extends Component {
             </div>
         )
     }
-    //TODO: user needs to see list of groups they are the host of and access them
 
 }
 

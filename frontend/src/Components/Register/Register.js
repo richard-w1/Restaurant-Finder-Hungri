@@ -15,16 +15,36 @@ const Register = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSubmit = () => {
+
+        document.getElementById('message').innerHTML = "";
+
         const data = {username: username, password: password, confirmPassword: confirmPassword, role: 'ROLE_USER'}
         if(password === confirmPassword){
+
             axios.post(baseUrl + "/register", data)
+            .then(
+                (response) => {
+                    document.getElementById('message').innerHTML = "Account successfully created, you can now log in.";
+                }
+            )
+            .catch(
+                (error) => {
+                    console.error(error.response.data.message);
+                    document.getElementById('message').innerHTML = error.response.data.message;
+                }
+            );
+
+
+        } else 
+        {
+            document.getElementById('message').innerHTML = "Make sure passwords match."
         }
     }
 
     return(
         <div class='body'> 
         <div class = "input">
-            <h1>Create Account</h1>
+            <h1 class = 'header'>Create Account</h1>
             <div className={classes.registercard}>
             <Card>
             <label class="sr-only">Username</label>
@@ -59,8 +79,11 @@ const Register = (props) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
             />
-            <Link to="/login">Have an account?</Link>
             <button type="submit" onClick={handleSubmit}>Register</button>
+            <Link to="/login">Have an account?</Link>
+            <div id = "message">
+
+            </div>
             </Card>
             </div>
         </div>

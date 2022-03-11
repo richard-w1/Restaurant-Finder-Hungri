@@ -35,6 +35,10 @@ class SearchForm extends Component {
             restaurants: (await response).data.restaurants
         })
 
+        const restaurantNames = this.state.restaurants.map((d) =>
+        <li key={d.name}>{d.name}</li>
+    );
+        document.getElementById('results').innerHTML = restaurantNames
     }
 
 
@@ -50,7 +54,7 @@ class SearchForm extends Component {
         if (this.displaySearch) {
             return (
                 <div class="input">
-                    <h1>Search Restaurants</h1>
+                    <h1 class = 'header' >Search Restaurants</h1>
                     <label class="sr-only">Enter City or Zip Code</label>
                     <input
                         type='text'
@@ -63,7 +67,9 @@ class SearchForm extends Component {
                         required
                     />
                     <button type='submit' onClick={this.handleSearch}>Search</button>
+                <div id = "results">
 
+                </div>
                 </div>
 
             );
@@ -75,13 +81,15 @@ class SearchForm extends Component {
             //         results.push(this.state.restaurants[i].name);
             // }
             const restaurantNames = this.state.restaurants.map((d) =>
-                <li key={d.name}>{d.name}</li>
-            );
+            <li key={d.name}>{d.name}</li>
+        );
 
             return (
                 <div>
                     <div class="input">
                         <h1>Search Restaurants</h1>
+
+                        
                         <label class="sr-only">Enter City or Zip Code</label>
                         <input
                             type='text'
@@ -95,7 +103,7 @@ class SearchForm extends Component {
                         />
                         <button type='submit' onClick={this.handleSearch}>Search</button>
 
-                    </div>
+                    
 
                     <div>
                         <div className={classes.restaurantCard}>
@@ -112,7 +120,7 @@ class SearchForm extends Component {
                         </Link>
                     </div>
 
-
+                    </div>
                 </div>
             )
         }
