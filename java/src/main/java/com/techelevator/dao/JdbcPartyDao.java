@@ -68,11 +68,11 @@ public class JdbcPartyDao implements PartyDao {
         Party party = null;
 
         try {
-            String sql = "SELECT group_id FROM groups WHERE group_id = ?";
+            String sql = "SELECT * FROM groups WHERE group_id = ?";
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, groupId);
 
             if(result.next()) {
-                party = mapRowToParty(result);
+                return mapRowToParty(result);
             }
         } catch (DataAccessException e) {
             System.out.println("Error Accessing Data.");
@@ -110,8 +110,8 @@ public class JdbcPartyDao implements PartyDao {
     private Party mapRowToParty(SqlRowSet rs) {
         Party party = new Party();
         party.setId(rs.getInt("group_id"));
-        party.setName(rs.getString("event_name"));
         party.setHostId(rs.getInt("user_id"));
+        party.setName(rs.getString("event_name"));
         party.setEndDate(rs.getTimestamp("end_date"));
         party.setHasEnded(rs.getBoolean("has_ended"));
         party.setLocation(rs.getString("location"));

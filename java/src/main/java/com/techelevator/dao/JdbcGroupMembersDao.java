@@ -2,10 +2,12 @@ package com.techelevator.dao;
 
 import com.techelevator.model.GroupMembers;
 import com.techelevator.model.RestaurantGroup;
+import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +22,29 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 
 
     @Override
-    public List<GroupMembers> findByGroupId(int groupId) {
+    public List<GroupMembers> findGroupMembersByGroupId(int groupId) {
         List<GroupMembers> groupMembersList = new ArrayList<>();
-        String sql = "Select member_name, member_id, user_vote from group_members where group_id = ?";
+        String sql = "Select * from group_members where group_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, groupId);
         while (results.next()) {
             groupMembersList.add(mapRowToGroupMembers(results));
         }
         return groupMembersList;
+    }
+
+    @Override
+    public boolean addToParty(User user, int groupId) {
+        String id_column = "member_id";
+        String sql = "INSERT INTO group_members (member_id, member_name, group_id, user_vote) VALUES (?, ?, ?, ?)";
+        int added = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{id_column});
+            ps.setInt(1, user.getId().intValue());
+            ps.setString(2, user.getUsername());
+            ps.setInt(3, groupId);
+            ps.setInt(4, 0);
+            return ps;
+        });
+        return true;
     }
 
     @Override
@@ -41,7 +58,7 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
     }
 
     @Override
-    public GroupMembers createVote(int member_id, String member_name, String member_url, int group_id, int user_vote) {
+    public GroupMembers createVote(int member_id, String member_name, int group_id, int user_vote) {
         return null;
     }
 
@@ -50,8 +67,8 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
         GroupMembers groupMembers = new GroupMembers();
         groupMembers.setMember_id(rs.getInt("member_id"));
         groupMembers.setMember_name(rs.getString("member_name"));
-        groupMembers.setMember_url(rs.getString("member_url"));
         groupMembers.setGroup_id(rs.getInt("group_id"));
+        groupMembers.setUser_vote(rs.getInt("user_vote"));
 
         return groupMembers;
     }
