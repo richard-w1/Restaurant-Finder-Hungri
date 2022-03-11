@@ -28,6 +28,12 @@
   
   .header a {
     text-decoration: none;
+    font-size: 3rem;
+    color: #E3686B;
+  }
+
+  #b {
+    text-decoration: none;
     font-size: 1.5rem;
     color: #E3686B;
   }

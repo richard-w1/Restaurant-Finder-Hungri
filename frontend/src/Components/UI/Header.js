@@ -32,14 +32,14 @@ class Header extends Component {
                     <div className={classes.navbar}>
                         <nav>
                         
-                        <Link class = 'a' to ='/CreateGroup' className={classes.navItem}>Invite Friends</Link>
+                        <Link className = 'b' to ='/CreateGroup' >Invite Friends</Link>
                         
                         {this.props.token.token !== undefined ?
                             <>
-                            <Link to='/Splash' onClick={this.handleLogout}>Logout</Link><Redirect to='/home' />
+                            <Link className = 'b' to = '/Splash' onClick={this.handleLogout}> &nbsp; Logout</Link><Redirect to='/home' />
                             </>
                         :
-                        <Link to='/login'>Login</Link>
+                        <Link className = 'b' to = '/login'> &nbsp; Login</Link>
                         }
 
                         </nav> 
