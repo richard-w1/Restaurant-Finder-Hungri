@@ -6,6 +6,7 @@ import com.techelevator.service.FindGroupVotesResponse;
 import com.techelevator.service.FindPartyResponse;
 import com.techelevator.service.FindRestaurantResponse;
 import com.techelevator.security.jwt.TokenProvider;
+import org.apache.coyote.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -81,5 +82,18 @@ public class RestaurantTinderController {
     public ResponseEntity<FindGroupVotesResponse> getGroupVotes(@PathVariable int groupId) {
         FindGroupVotesResponse findGroupVotesResponse = new FindGroupVotesResponse();
         findGroupVotesResponse.setGroupVotes(groupVotesDao.retrieveVotes(groupId));
-        return new ResponseEntity<>(findGroupVotesResponse, null, HttpStatus.OK);}
+        return new ResponseEntity<>(findGroupVotesResponse, null, HttpStatus.OK);
+    }
+
+    //Party invite link, click button to open invite link page
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/invite", method = RequestMethod.POST)
+
+    //Main party page
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}", method = RequestMethod.GET)
+
+    //Voting page for party, click button to open vote page
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/vote", method = RequestMethod.POST)
 }
