@@ -2,7 +2,8 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.*;
 import com.techelevator.model.*;
-import com.techelevator.service.FindGroupVotesResponse;
+import com.techelevator.service.FindGroupMembersResponse;
+import com.techelevator.service.FindRestaurantGroupResponse;
 import com.techelevator.service.FindPartyResponse;
 import com.techelevator.service.FindRestaurantResponse;
 import com.techelevator.security.jwt.TokenProvider;
@@ -22,8 +23,8 @@ public class RestaurantTinderController {
     private final Logger log = LoggerFactory.getLogger(RestaurantTinderController.class);
 
     PartyDao partyDao;
+    GroupMembersDao groupMembersDao;
     RestaurantDao restaurantDao;
-    GroupVotesDao groupVotesDao;
     RestaurantGroupDao restaurantGroupDao;
 
     private final TokenProvider tokenProvider;
@@ -31,13 +32,13 @@ public class RestaurantTinderController {
     private UserDao userDao;
 
     public RestaurantTinderController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder,
-                                      UserDao userDao, PartyDao partyDao, RestaurantDao restaurantDao, GroupVotesDao groupVotesDao, RestaurantGroupDao restaurantGroupDao) {
+                                      UserDao userDao, PartyDao partyDao, GroupMembersDao groupMembersDao, RestaurantDao restaurantDao, RestaurantGroupDao restaurantGroupDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
         this.partyDao = partyDao;
+        this.groupMembersDao = groupMembersDao;
         this.restaurantDao = restaurantDao;
-        this.groupVotesDao = groupVotesDao;
         this.restaurantGroupDao = restaurantGroupDao;
     }
 
@@ -78,8 +79,45 @@ public class RestaurantTinderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/party/{groupId}/view-finalists", method = RequestMethod.GET)
-    public ResponseEntity<FindGroupVotesResponse> getGroupVotes(@PathVariable int groupId) {
-        FindGroupVotesResponse findGroupVotesResponse = new FindGroupVotesResponse();
-        findGroupVotesResponse.setGroupVotes(groupVotesDao.retrieveVotes(groupId));
-        return new ResponseEntity<>(findGroupVotesResponse, null, HttpStatus.OK);}
+    public ResponseEntity<FindRestaurantGroupResponse> getGroupVotes(@PathVariable int groupId) {
+        FindRestaurantGroupResponse findRestaurantGroupResponse = new FindRestaurantGroupResponse();
+        findRestaurantGroupResponse.setRestaurantGroup(restaurantGroupDao.retrieveVotes(groupId));
+        return new ResponseEntity<>(findRestaurantGroupResponse, null, HttpStatus.OK);
+    }
+
+//    //Party invite link, click button to open invite link page
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @RequestMapping(value = "/party/{groupId}/invite", method = RequestMethod.POST)
+
+    //Main party page
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}", method = RequestMethod.GET)
+    //Retrieve event details ie. Event name, Host, Location, End Date.
+    public ResponseEntity<FindPartyResponse> getEventDetails(@PathVariable int groupId) {
+        FindPartyResponse findPartyResponse = new FindPartyResponse();
+        findPartyResponse.setParty(partyDao.findPartyById(groupId));
+        return new ResponseEntity<>(findPartyResponse, null, HttpStatus.OK);
+    }
+    //Retrieve restaurants in party location
+    //** all part of main page **
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/restaurants", method = RequestMethod.GET)
+    public ResponseEntity<FindRestaurantResponse> getPartyRestaurants(@PathVariable int groupId) {
+        FindRestaurantResponse findRestaurantResponse = new FindRestaurantResponse();
+        findRestaurantResponse.setRestaurants(restaurantDao.findRestaurant(partyDao.findPartyById(groupId).getLocation()));
+        return new ResponseEntity<>(findRestaurantResponse, null, HttpStatus.OK);
+    }
+    //Retrieve party members
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/members", method = RequestMethod.GET)
+    public ResponseEntity<FindGroupMembersResponse> getGroupMembers(@PathVariable int groupId) {
+        FindGroupMembersResponse findGroupMembersResponse = new FindGroupMembersResponse();
+        findGroupMembersResponse.setGroupMembers(groupMembersDao.findGroupMembersByGroupId(groupId));
+        return new ResponseEntity<>(findGroupMembersResponse, null, HttpStatus.OK);
+    }
+
+
+//    //Voting page for party, click button to open vote page
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @RequestMapping(value = "/party/{groupId}/vote", method = RequestMethod.POST)
 }
