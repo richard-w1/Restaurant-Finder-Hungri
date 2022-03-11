@@ -43,10 +43,11 @@ const Register = (props) => {
 
     return(
         <div class='body'> 
-        <div class = "input">
-            <h1 class = 'header'>Create Account</h1>
+        <div>
+
             <div className={classes.registercard}>
             <Card>
+            <h2>Create Account</h2>
             <label class="sr-only">Username</label>
             <input
                 type="text"

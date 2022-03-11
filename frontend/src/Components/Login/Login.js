@@ -47,10 +47,10 @@ class Login extends Component {
     render() {
         return (
             <div class='body'>
-                <div class = 'input'>
-                    <h1 class='header'>Please Sign In</h1>
+                <div>
                     <div className={classes.logincard}>
                         <Card>
+                            <h2>Please Sign In</h2>
                             <label class="sr-only">Username</label>
                             <input
                                 type="text"
@@ -73,6 +73,7 @@ class Login extends Component {
                                 onChange={this.handleInputChange}
                                 required
                             />
+                            
                             <button type="submit" onClick={this.handleLogin}>Sign in</button>
                             <Link to="/register">Need an account?</Link>
 

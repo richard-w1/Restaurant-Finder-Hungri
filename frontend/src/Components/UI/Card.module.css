@@ -27,3 +27,38 @@
     display: inline-block;
     text-decoration: none;
   }
+
+  
+  h1 {
+    
+    font-weight: 100;
+    font-size: 3rem;
+    margin-top: 8rem;
+    margin-bottom: 2rem;
+    outline: none;
+    color: #E3686B;
+  
+    
+  }
+
+  h2 {
+    
+    font-weight: 100;
+    font-size: 2rem;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    outline: none;
+    color: #E3686B;
+  }
+
+
+    .button2 {
+    font-size: 1rem;
+    padding: .5rem 1.1rem .4rem;
+    border: 1px solid;
+    border-radius: 1rem;
+    background: none;
+    color: #1B2121;
+    display: inline-block;
+    text-decoration: none;
+  }

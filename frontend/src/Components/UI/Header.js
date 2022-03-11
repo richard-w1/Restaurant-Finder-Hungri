@@ -23,9 +23,9 @@ class Header extends Component {
                     <div className={classes.logo}> 
                     {this.props.token !== undefined  ?
 
-                    <Link class = 'a' to='/home'>Hungri</Link>
+                    <Link class = 'a' to='/home'>Hungri.</Link>
                     :
-                    <Link class = 'a' to='/Splash'>Hungri</Link>
+                    <Link class = 'a' to='/Splash'>Hungri.</Link>
                     }
 
                     </div>
