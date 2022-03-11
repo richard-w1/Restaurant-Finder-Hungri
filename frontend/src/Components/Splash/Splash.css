@@ -1,0 +1,43 @@
+
+#preheading {
+	font-weight: 300;
+	font-size: 1.4rem;
+	margin-top: .4rem;
+	outline: none;
+    color: #F4EDE5;
+}
+
+#heading {
+	font-weight: 600;
+	font-size: 4rem;
+	margin-bottom: 0;
+	outline: none;
+    color: #F4EDE5;
+}
+
+#strapline {
+	font-weight: 300;
+	font-size: 1.4rem;
+	margin-top: .4rem;
+	outline: none;
+    color: #F4EDE5;
+}
+
+.button {
+	font-size: 1rem;
+	padding: .5rem 1.1rem .4rem;
+	border: 1px solid;
+	border-radius: 1rem;
+	background: none;
+	color: #F4EDE5;
+	display: inline-block;
+	text-decoration: none;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../Pictures/splashbg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+
+   }
