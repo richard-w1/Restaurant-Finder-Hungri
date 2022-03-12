@@ -48,13 +48,13 @@ const Register = (props) => {
             <div className={classes.registercard}>
             <Card>
             <h2>Create Account</h2>
-            <label class="sr-only">Username</label>
+            <label class="sr-only">Email</label>
             <input
                 type="text"
                 id="username"
                 name="username"
                 class="form-control"
-                placeholder="Username"
+                placeholder="Email"
                 v-model="user.username"
                 onChange={(e) => setUsername(e.target.value)}
                 required

@@ -10,6 +10,8 @@ import SearchResults from '../SearchResults/SearchResults';
 import '../../style.css'
 import Card from '../UI/Card'
 import classes from './SearchForm.module.css'
+import Restaurants from '../restaurants/Restaurants';
+import RestaurantList from '../restaurants/RestaurantList';
 
 
 class SearchForm extends Component {
@@ -36,8 +38,14 @@ class SearchForm extends Component {
         })
 
         const restaurantNames = this.state.restaurants.map((d) =>
-        <li key={d.name}>{d.name}</li>
-    );
+            <li key={d.name}>{d.name}</li>
+
+        );
+        const restaurantDescription = this.state.restaurants.map((d) =>
+            <li key={d.description}>{d.description}</li>
+
+        );
+
         document.getElementById('results').innerHTML = restaurantNames
     }
 
@@ -54,7 +62,7 @@ class SearchForm extends Component {
         if (this.displaySearch) {
             return (
                 <div class="input">
-                    <h1 class = 'header' >Search Restaurants</h1>
+                    <h1 class='header' >Search Restaurants</h1>
                     <label class="sr-only">Enter City or Zip Code</label>
                     <input
                         type='text'
@@ -67,9 +75,9 @@ class SearchForm extends Component {
                         required
                     />
                     <button type='submit' onClick={this.handleSearch}>Search</button>
-                <div id = "results">
+                    <div id="results">
 
-                </div>
+                    </div>
                 </div>
 
             );
@@ -81,15 +89,25 @@ class SearchForm extends Component {
             //         results.push(this.state.restaurants[i].name);
             // }
             const restaurantNames = this.state.restaurants.map((d) =>
-            <li key={d.name}>{d.name}</li>
-        );
+                <li key={d.name}>{d.name} {d.description}</li>
+
+                //    const restaurantOptions = this.state.restaurants.map((d) => 
+                //        <RestaurantList />
+                //     );
+
+            );
+            console.log(this.state.restaurants)
+            const restaurantDescription = this.state.restaurants.map((d) =>
+                <li key={d.description}></li>
+
+            );
 
             return (
                 <div>
                     <div class="input">
                         <h1>Search Restaurants</h1>
 
-                        
+
                         <label class="sr-only">Enter City or Zip Code</label>
                         <input
                             type='text'
@@ -103,22 +121,20 @@ class SearchForm extends Component {
                         />
                         <button type='submit' onClick={this.handleSearch}>Search</button>
 
-                    
 
-                    <div>
-                        <div className={classes.restaurantCard}>
-                            <Card>
-                                <ul>{restaurantNames}</ul>
-                            </Card>
+
+                        <div>
+                            <div className={classes.restaurantCard}>
+                                <Restaurants />
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <Link to="/SearchForm">
-                            <button renderAs="button">
-                                <span>Back to Search</span>
-                            </button>
-                        </Link>
-                    </div>
+                        <div>
+                            <Link to="/SearchForm">
+                                <button renderAs="button">
+                                    <span>Back to Search</span>
+                                </button>
+                            </Link>
+                        </div>
 
                     </div>
                 </div>

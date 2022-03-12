@@ -51,13 +51,13 @@ class Login extends Component {
                     <div className={classes.logincard}>
                         <Card>
                             <h2>Please Sign In</h2>
-                            <label class="sr-only">Username</label>
+                            <label class="sr-only">Email</label>
                             <input
                                 type="text"
                                 id="username"
                                 name="username"
                                 class="form-control"
-                                placeholder="Username"
+                                placeholder="Email"
                                 v-model="user.username"
                                 onChange={this.handleInputChange}
                                 required
