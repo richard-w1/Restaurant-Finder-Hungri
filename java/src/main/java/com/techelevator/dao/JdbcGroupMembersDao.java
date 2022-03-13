@@ -34,16 +34,22 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 
     @Override
     public boolean addToParty(User user, int groupId) {
-        String id_column = "member_id";
-        String sql = "INSERT INTO group_members (member_id, member_name, group_id, user_vote) VALUES (?, ?, ?, ?)";
-        int added = jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, new String[]{id_column});
-            ps.setInt(1, user.getId().intValue());
-            ps.setString(2, user.getUsername());
-            ps.setInt(3, groupId);
-            ps.setInt(4, 0);
-            return ps;
-        });
+        int validation = checkIfUserInGroupExists(user.getId().intValue(), groupId);
+
+        if(validation == 1) {
+            System.out.println("User " + user.getUsername() + " is already in this group: " + groupId);
+        } else {
+            String id_column = "member_id";
+            String sql = "INSERT INTO group_members (member_id, member_name, group_id, user_vote) VALUES (?, ?, ?, ?)";
+            int added = jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(sql, new String[]{id_column});
+                ps.setInt(1, user.getId().intValue());
+                ps.setString(2, user.getUsername());
+                ps.setInt(3, groupId);
+                ps.setInt(4, 0);
+                return ps;
+            });
+        }
         return true;
     }
 
@@ -60,6 +66,20 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
     @Override
     public GroupMembers createVote(int member_id, String member_name, int group_id, int user_vote) {
         return null;
+    }
+
+    @Override
+    public int checkIfUserInGroupExists(int userId, int groupId) {
+        String sql = "SELECT * FROM group_members WHERE member_id = ? AND group_id = ?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId, groupId);
+
+        if(result.next()){
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
 

@@ -4,6 +4,7 @@ import com.techelevator.model.GroupMembers;
 import com.techelevator.model.Restaurant;
 import com.techelevator.model.RestaurantGroup;
 import com.techelevator.model.User;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface GroupMembersDao {
 
     GroupMembers createVote(int member_id, String member_name, int group_id, int user_vote);
     //restaurant
+
+    int checkIfUserInGroupExists(int userId, int groupId);
+
 
 
 }

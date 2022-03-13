@@ -9,8 +9,11 @@ import com.techelevator.service.FindRestaurantResponse;
 import com.techelevator.security.jwt.TokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @CrossOrigin("http://localhost:3000")
+@PreAuthorize("isAuthenticated()")
 @RestController
 public class RestaurantTinderController {
     private final Logger log = LoggerFactory.getLogger(RestaurantTinderController.class);
@@ -56,6 +60,7 @@ public class RestaurantTinderController {
 
         int key = partyDao.create(party);
         party.setId(key);
+        partyDao.setInviteLinkByGroupId(party.getId());
         restaurantGroupDao.addDataToRestaurantGroup(party);
     }
 
@@ -85,14 +90,18 @@ public class RestaurantTinderController {
         return new ResponseEntity<>(findRestaurantGroupResponse, null, HttpStatus.OK);
     }
 
-//    //Party invite link, click button to open invite link page
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @RequestMapping(value = "/party/{groupId}/invite", method = RequestMethod.POST)
+    //Party invite link set to each groupId, when clicked add User into group as group member
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/invite", method = RequestMethod.POST)
+    public void addGroupMember(@PathVariable int groupId, @RequestBody User user) {
+        groupMembersDao.addToParty(user, groupId);
+    }
+
 
     //Main party page
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/party/{groupId}", method = RequestMethod.GET)
-    //Retrieve event details ie. Event name, Host, Location, End Date.
+    //Retrieve event details i.e. Event name, Host, Location, End Date.
     public ResponseEntity<FindPartyResponse> getEventDetails(@PathVariable int groupId) {
         FindPartyResponse findPartyResponse = new FindPartyResponse();
         findPartyResponse.setParty(partyDao.findPartyById(groupId));

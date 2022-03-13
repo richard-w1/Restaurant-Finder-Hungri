@@ -21,6 +21,7 @@ public class PartyDTO {
     private String location;
     @NotEmpty
     private String token;
+    private String inviteLink;
 
     public int getGroupId() {
         return groupId;
@@ -92,5 +93,13 @@ public class PartyDTO {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getInviteLink() {
+        return inviteLink;
+    }
+
+    public void setInviteLink(String inviteLink) {
+        this.inviteLink = inviteLink;
     }
 }
