@@ -1,0 +1,38 @@
+.restaurantCard {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+  .homebuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 500px;
+  }
+
+  .listofrest {
+    display: flex;
+    flex-direction: row;
+    justify-content: center ;
+    width: 80%;
+    background-color: #BCC99B;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin: 2rem;
+  }
+
+  .restimage{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: 0 100%;
+  }
+
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 32px;
+    color: #E3686B;
+  }

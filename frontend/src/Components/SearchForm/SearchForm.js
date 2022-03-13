@@ -8,8 +8,7 @@ import { baseUrl } from '../../Shared/baseUrl'
 import axios from 'axios'
 import '../../style.css'
 import Card from '../UI/Card'
-import classes from './SearchForm.module.css'
-
+import './SearchForm.css'
 
 class SearchForm extends Component {
 
@@ -37,18 +36,34 @@ class SearchForm extends Component {
         var restaurant = "<ul>";
         this.state.restaurants.map((d) =>{
 
+        restaurant += "<div class = 'listofrest'>";
+        restaurant += "<img class = 'restimage' src='/images/" + d.restaurantId + ".jpg' alt = 'title'/>";
+
         restaurant += "<div>";
-        restaurant += "<img src='/images/" + d.restaurantId + ".jpg' alt = 'title' height = '250px' width = 'auto'/>";
+        restaurant += "<ul>";
         restaurant += "<h3>" + d.name + "</h3>";
-        restaurant += "<p>" + "Rating: " + d.rating + "</p>" 
-        restaurant += "<p>" + d.type + "</p>" 
-        restaurant += "<p>" + d.zipCode + " " + d.city + "</p>"
+
+        restaurant += "<p>"
+        for (var i = 0; i < d.rating; i++) {
+            restaurant += "<img src='/star.png' alt = 'rating' height = '20px' width = '20px'>"
+        }
+        restaurant += "</p>";
+        restaurant += "<p><b>" + d.type + "</b></p>";
+        restaurant += "<p>" + d.city + " " + d.zipCode + "</p>";
         restaurant += "<p>" + d.description + "</p>";
-        restaurant += "<p>" + "Hours: " + d.hoursOfOperation + "</p>"
-        restaurant += "<p>" + d.open + "</p>" 
-        restaurant += "<p>" + "Phone: " + d.phoneNumber + "</p>" 
-
-
+        var isOpen = '';
+        if(d.open) {
+            isOpen = "Open"
+        } else {
+            isOpen = 'Closed'
+        };
+        restaurant += "<p><b>" + isOpen + "</b></p>" 
+        restaurant += "<p>" + "<b>Hours:</b> " + d.hoursOfOperation + "</p>";
+        restaurant += "<p>" + "<b>Phone:</b> " + d.phoneNumber + "</p>";
+        restaurant += "</ul>";
+        restaurant += "</div>";
+        
+        restaurant += "</div>";
 
         restaurant += "<hr>";
         });
@@ -96,7 +111,7 @@ class SearchForm extends Component {
             return (
                 <div>
                     <div class="input">
-                        <h1>Search Restaurants</h1>
+                        <h1 class='header'>Search Restaurants</h1>
                         <label class="sr-only">Enter City or Zip Code</label>
                         <input
                             type='text'
@@ -110,10 +125,8 @@ class SearchForm extends Component {
                         />
                         <button type='submit' onClick={this.handleSearch}>Search</button>
 
+                        <div id = 'results'></div>
 
-
-                        <div id = 'results'>
-                        </div>
                         <div>
                             <Link to="/SearchForm">
                                 <button renderAs="button">
