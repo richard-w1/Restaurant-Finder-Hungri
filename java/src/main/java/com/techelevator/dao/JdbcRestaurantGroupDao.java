@@ -37,8 +37,8 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
         return null;
     }
 
-    @Override
-    public List<>
+//    @Override
+//    public List<>
 
     @Override
     public List<RestaurantGroup> retrieveVotes(int groupId) {

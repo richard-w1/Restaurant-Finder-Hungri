@@ -10,7 +10,7 @@ public interface RestaurantGroupDao {
 
     List<Restaurant> sendListToGroupByGroupId(int groupId);
 
-    List<RestaurantGroup> addMemberVotes(GroupMembers groupMembers);
+//    List<RestaurantGroup> addMemberVotes(GroupMembers groupMembers);
 
     List<RestaurantGroup> retrieveVotes(int groupId);
 }
