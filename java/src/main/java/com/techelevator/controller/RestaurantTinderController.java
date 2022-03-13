@@ -62,6 +62,7 @@ public class RestaurantTinderController {
         party.setId(key);
         partyDao.setInviteLinkByGroupId(party.getId());
         restaurantGroupDao.addDataToRestaurantGroup(party);
+        restaurantGroupDao.initSetTotalVotes(party.getId());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -126,7 +127,11 @@ public class RestaurantTinderController {
     }
 
 
-//    //Voting page for party, click button to open vote page
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @RequestMapping(value = "/party/{groupId}/vote", method = RequestMethod.POST)
+    //Voting page for party, click button to open vote page
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/party/{groupId}/vote", method = RequestMethod.POST)
+    public void addUserVotesToDatabase(@PathVariable int groupId) {
+        FindGroupMembersResponse findGroupMembersResponse = new FindGroupMembersResponse();
+        restaurantGroupDao.addMemberVotes(findGroupMembersResponse.getGroupMember());
+    }
 }

@@ -10,8 +10,8 @@ import SearchResults from '../SearchResults/SearchResults';
 import '../../style.css'
 import Card from '../UI/Card'
 import classes from './SearchForm.module.css'
-import Restaurants from '../restaurants/Restaurants';
-import RestaurantList from '../restaurants/RestaurantList';
+import Restaurants from '../Restaurants/Restaurants';
+import RestaurantList from '../Restaurants/RestaurantList';
 
 
 class SearchForm extends Component {

@@ -24,7 +24,7 @@ public interface GroupMembersDao {
     //get list of restaurants for the group so each user can vote on
     List<RestaurantGroup> sendListOfRestaurants(int groupId);
 
-    GroupMembers createVote(int member_id, String member_name, int group_id, int user_vote);
+//    GroupMembers vote(int member_id, int group_id, int user_vote);
     //restaurant
 
     int checkIfUserInGroupExists(int userId, int groupId);

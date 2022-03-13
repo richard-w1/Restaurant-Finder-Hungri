@@ -8,9 +8,13 @@ public interface RestaurantGroupDao {
 
     boolean addDataToRestaurantGroup(Party party);
 
-    List<Restaurant> sendListToGroupByGroupId(int groupId);
+    List<RestaurantGroup> getRestaurantIdsByGroupId(int groupId);
 
-//    List<RestaurantGroup> addMemberVotes(GroupMembers groupMembers);
+//    GroupMembers vote(int member_id, int group_id, int user_vote, int restaurantId);
+
+    boolean addMemberVotes(GroupMembers groupMembers);
+
+    boolean initSetTotalVotes(int groupId);
 
     List<RestaurantGroup> retrieveVotes(int groupId);
 }

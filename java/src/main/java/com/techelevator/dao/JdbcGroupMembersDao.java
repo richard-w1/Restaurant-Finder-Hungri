@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +64,18 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
         return null;
     }
 
-    @Override
-    public GroupMembers createVote(int member_id, String member_name, int group_id, int user_vote) {
-        return null;
-    }
+//    @Override
+//    public GroupMembers vote(int member_id, int group_id, int user_vote) {
+//        GroupMembers groupMember = new GroupMembers();
+//
+//        if(user_vote == 1) {
+//            String sql = "update restaurant_group set total_votes = total_votes + 1 where group_id = ? and restaurant_id = ?";
+//        } else if(user_vote == -1) {
+//
+//        } else {
+//            System.out.println("Invalid vote value.");
+//        }
+//    }
 
     @Override
     public int checkIfUserInGroupExists(int userId, int groupId) {
