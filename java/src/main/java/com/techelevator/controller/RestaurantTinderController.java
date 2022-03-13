@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @CrossOrigin("http://localhost:3000")
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("hasRole('ROLE_USER')")
 @RestController
 public class RestaurantTinderController {
     private final Logger log = LoggerFactory.getLogger(RestaurantTinderController.class);

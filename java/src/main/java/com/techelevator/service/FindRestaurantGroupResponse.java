@@ -1,6 +1,5 @@
 package com.techelevator.service;
 
-import com.techelevator.model.GroupVotes;
 import com.techelevator.model.RestaurantGroup;
 
 import java.util.List;

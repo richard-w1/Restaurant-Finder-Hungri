@@ -38,6 +38,9 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
     }
 
     @Override
+    public List<>
+
+    @Override
     public List<RestaurantGroup> retrieveVotes(int groupId) {
         List<RestaurantGroup> restaurantGroup = new ArrayList<>();
         String sql =
