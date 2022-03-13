@@ -24,8 +24,10 @@ class Splash extends Component {
                     <h3 id="strapline">Eat the way that <span>you</span> want.</h3>
                     <h3 id="strapline">Eat the way that <span>they</span> want.</h3>
                     <h3 id="strapline">Eat the way that <span>everyone</span> wants.</h3>
-
+                    <p></p>
                     <div>
+                    <p></p>
+                    
                     <span><a class="button" href="/Login" >Login</a></span>
                     <span> &nbsp; &nbsp; </span>
                     <span><a class="button" href="/Register" >Register</a></span>

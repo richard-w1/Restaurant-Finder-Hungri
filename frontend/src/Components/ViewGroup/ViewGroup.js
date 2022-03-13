@@ -12,7 +12,6 @@ class ViewGroup extends Component {
     constructor(props) {
         super(props);
         this.displaySearch = true;
-        //this.handleSearch();
         this.handleInputChange = this.handleInputChange.bind(this);
         this.state = {
             groups: []
@@ -21,7 +20,6 @@ class ViewGroup extends Component {
 
     handleSearch = async () => {
         this.displaySearch = false;
-        // const data = {userId : this.state.userId}
         console.log(this.props.token);
         var response = axios.get(baseUrl + "/find_groups/" + encodeURI(this.props.token));
         console.log((await response).data.parties);
@@ -42,9 +40,6 @@ class ViewGroup extends Component {
     generateList(){
         var groupInfo = "No invitations found, invite some friends!";
         if (this.state.groups.length > 0){
-            //groupInfo = this.state.groups.map((d) => 
-            //<li key={d.name}>{d.name}</li>
-            //);
             groupInfo = "<ul>";
             for (var i = 0; i < this.state.groups.length; i++){
                 groupInfo += "<li>" + this.state.groups[i].name + "</li>"
@@ -70,8 +65,6 @@ class ViewGroup extends Component {
                         <span>Create an Invitation</span>
                     </button>
                 </Link>
-               
-                
             </div>
         )
     }

@@ -30,8 +30,16 @@ class Login extends Component {
 
 
     handleLogin = async () => {
+        document.getElementById('message').innerHTML = "";
+
         const data = { username: this.state.username, password: this.state.password };
         const userWithToken = await axios.post(baseUrl + '/login', data)
+        .catch(
+            (error) => {
+                console.error(error.response.data.message);
+                document.getElementById('message').innerHTML = error.response.data.message;
+            }
+        )
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
         console.log(this.props);
@@ -75,6 +83,9 @@ class Login extends Component {
                             />
                             
                             <button type="submit" onClick={this.handleLogin}>Sign in</button>
+
+                            <div id = "message"></div>
+
                             <Link to="/register">Need an account?</Link>
 
                             

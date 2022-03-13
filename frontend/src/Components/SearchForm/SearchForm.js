@@ -6,13 +6,9 @@ import { withRouter } from 'react-router-dom'
 import { addToken, addUser } from '../../Redux/actionCreators'
 import { baseUrl } from '../../Shared/baseUrl'
 import axios from 'axios'
-import SearchResults from '../SearchResults/SearchResults';
 import '../../style.css'
 import Card from '../UI/Card'
-import classes from './SearchForm.module.css'
-import Restaurants from '../Restaurants/Restaurants';
-import RestaurantList from '../Restaurants/RestaurantList';
-
+import './SearchForm.css'
 
 class SearchForm extends Component {
 
@@ -37,16 +33,42 @@ class SearchForm extends Component {
             restaurants: (await response).data.restaurants
         })
 
-        const restaurantNames = this.state.restaurants.map((d) =>
-            <li key={d.name}>{d.name}</li>
+        var restaurant = "<ul>";
+        this.state.restaurants.map((d) =>{
 
-        );
-        const restaurantDescription = this.state.restaurants.map((d) =>
-            <li key={d.description}>{d.description}</li>
+        restaurant += "<div class = 'listofrest'>";
+        restaurant += "<img class = 'restimage' src='/images/" + d.restaurantId + ".jpg' alt = 'title'/>";
 
-        );
+        restaurant += "<div>";
+        restaurant += "<ul>";
+        restaurant += "<h3>" + d.name + "</h3>";
 
-        document.getElementById('results').innerHTML = restaurantNames
+        restaurant += "<p>"
+        for (var i = 0; i < d.rating; i++) {
+            restaurant += "<img src='/star.png' alt = 'rating' height = '20px' width = '20px'>"
+        }
+        restaurant += "</p>";
+        restaurant += "<p><b>" + d.type + "</b></p>";
+        restaurant += "<p>" + d.city + " " + d.zipCode + "</p>";
+        restaurant += "<p>" + d.description + "</p>";
+        var isOpen = '';
+        if(d.open) {
+            isOpen = "Open"
+        } else {
+            isOpen = 'Closed'
+        };
+        restaurant += "<p><b>" + isOpen + "</b></p>" 
+        restaurant += "<p>" + "<b>Hours:</b> " + d.hoursOfOperation + "</p>";
+        restaurant += "<p>" + "<b>Phone:</b> " + d.phoneNumber + "</p>";
+        restaurant += "</ul>";
+        restaurant += "</div>";
+        
+        restaurant += "</div>";
+
+        restaurant += "<hr>";
+        });
+        restaurant += "</ul>";
+        document.getElementById('results').innerHTML = restaurant
     }
 
 
@@ -83,31 +105,13 @@ class SearchForm extends Component {
             );
         }
         else {
-            // var string = "";
-            // const results = [];
-            // for (var i=0; i < this.state.restaurants.length; i++){
-            //         results.push(this.state.restaurants[i].name);
-            // }
-            const restaurantNames = this.state.restaurants.map((d) =>
-                <li key={d.name}>{d.name} {d.description}</li>
 
-                //    const restaurantOptions = this.state.restaurants.map((d) => 
-                //        <RestaurantList />
-                //     );
-
-            );
             console.log(this.state.restaurants)
-            const restaurantDescription = this.state.restaurants.map((d) =>
-                <li key={d.description}></li>
-
-            );
 
             return (
                 <div>
                     <div class="input">
-                        <h1>Search Restaurants</h1>
-
-
+                        <h1 class='header'>Search Restaurants</h1>
                         <label class="sr-only">Enter City or Zip Code</label>
                         <input
                             type='text'
@@ -121,13 +125,8 @@ class SearchForm extends Component {
                         />
                         <button type='submit' onClick={this.handleSearch}>Search</button>
 
+                        <div id = 'results'></div>
 
-
-                        <div>
-                            <div className={classes.restaurantCard}>
-                                <Restaurants />
-                            </div>
-                        </div>
                         <div>
                             <Link to="/SearchForm">
                                 <button renderAs="button">

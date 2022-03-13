@@ -31,15 +31,13 @@ class Header extends Component {
                     </div>
                     <div className={classes.navbar}>
                         <nav>
-                        
-                        <Link className = 'b' to ='/CreateGroup' >Invite Friends</Link>
-                        
+
                         {this.props.token.token !== undefined ?
                             <>
                             <Link className = 'b' to = '/Splash' onClick={this.handleLogout}> &nbsp; Logout</Link><Redirect to='/home' />
                             </>
                         :
-                        <Link className = 'b' to = '/login'> &nbsp; Login</Link>
+                        <Link className = 'b' to = '/login' > &nbsp; Login</Link>
                         }
 
                         </nav> 
@@ -52,8 +50,3 @@ class Header extends Component {
 
 }
 export default Header;
-
-
-
-
-
