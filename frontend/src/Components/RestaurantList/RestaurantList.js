@@ -1,4 +1,4 @@
-import Restaurants from './Restaurants'
+import Restaurants from '../Restaurants/Restaurants'
 import classes from './RestaurantList.module.css';
 
 

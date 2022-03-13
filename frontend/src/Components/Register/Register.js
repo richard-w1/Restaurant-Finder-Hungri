@@ -70,6 +70,7 @@ const Register = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
+            one capital letter, one lower, one number, minimum of 8 characters
             <input
                 type="password"
                 id="password-confirm"

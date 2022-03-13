@@ -10,8 +10,8 @@ import SearchResults from '../SearchResults/SearchResults';
 import '../../style.css'
 import Card from '../UI/Card'
 import classes from './SearchForm.module.css'
-import Restaurants from '../restaurants/Restaurants';
-import RestaurantList from '../restaurants/RestaurantList';
+import Restaurants from '../Restaurants/Restaurants';
+// import RestaurantList from '../RestaurantList/RestaurantList';
 
 
 class SearchForm extends Component {
@@ -38,15 +38,44 @@ class SearchForm extends Component {
         })
 
         const restaurantNames = this.state.restaurants.map((d) =>
-            <li key={d.name}>{d.name}</li>
+        <li className={classes.item}>
+        <div className={classes.image}>
+            <img src="/images/ali-inay-y3aP9oo9Pjc-upslash.jpg" alt="title" />
+        </div>
+        <div className={classes.content}>
+            <h3>TITLE: {d.name}</h3>
+            <p>DESCRIPTION: {d.discription}</p>
+            <p>HOURS</p>
+            <p>BREAKFAST</p>
+            <p>OPEN</p>
+        </div>
+        <div className={classes.action}>
+            <button>
+                Like
+            </button>
+        </div>
+        </li>
 
         );
-        const restaurantDescription = this.state.restaurants.map((d) =>
-            <li key={d.description}>{d.description}</li>
+        var restaurant = "<ul>";
+        this.state.restaurants.map((d) =>{
 
-        );
+        restaurant += "<div>";
+        restaurant += "<img src='/images/" + d.restaurantId + ".jpg' alt = 'title' height = '250px' width = 'auto'/>";
+        restaurant += "<h3>" + d.name + "</h3>";
+        restaurant += "<p>" + d.type + "</p>" 
+        restaurant += "<p>" + d.zipCode + " " + d.city + "</p>"
+        restaurant += "<p>" + d.description + "</p>";
+        restaurant += "<p>" + "Hours: " + d.hoursOfOperation + "</p>"
+        restaurant += "<p>" + d.open + "</p>" 
+        restaurant += "<p>" + "Phone: " + d.phoneNumber + "</p>" 
+        restaurant += "<p>" + "Rating: " + d.rating + "</p>" 
 
-        document.getElementById('results').innerHTML = restaurantNames
+
+        restaurant += "<hr>";
+        });
+        restaurant += "</ul>";
+        document.getElementById('results').innerHTML = restaurant
     }
 
 
@@ -83,24 +112,8 @@ class SearchForm extends Component {
             );
         }
         else {
-            // var string = "";
-            // const results = [];
-            // for (var i=0; i < this.state.restaurants.length; i++){
-            //         results.push(this.state.restaurants[i].name);
-            // }
-            const restaurantNames = this.state.restaurants.map((d) =>
-                <li key={d.name}>{d.name} {d.description}</li>
 
-                //    const restaurantOptions = this.state.restaurants.map((d) => 
-                //        <RestaurantList />
-                //     );
-
-            );
             console.log(this.state.restaurants)
-            const restaurantDescription = this.state.restaurants.map((d) =>
-                <li key={d.description}></li>
-
-            );
 
             return (
                 <div>
@@ -123,7 +136,7 @@ class SearchForm extends Component {
 
 
 
-                        <div>
+                        <div id = 'results'>
                             <div className={classes.restaurantCard}>
                                 <Restaurants />
                             </div>

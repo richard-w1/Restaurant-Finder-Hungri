@@ -20,7 +20,7 @@ function Restaurants(props) {
         <Card>
         <li className={classes.item}>
             <div className={classes.image}>
-                <img src="./images/ali-inay-y3aP9oo9Pjc-upslash.jpg" alt="title" />
+                <img src="/images/ali-inay-y3aP9oo9Pjc-upslash.jpg" alt="title" />
             </div>
             <div className={classes.content}>
                 <h3>TITLE</h3>
