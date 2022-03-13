@@ -70,7 +70,7 @@ const Register = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            one capital letter, one lower, one number, minimum of 8 characters
+           <div class = 'pw' >Please include one capital letter, one lower, one number, minimum of 8 characters</div>
             <input
                 type="password"
                 id="password-confirm"
@@ -82,10 +82,9 @@ const Register = (props) => {
                 required
             />
             <button type="submit" onClick={handleSubmit}>Register</button>
+            <div id = "message"></div>
             <Link to="/login">Have an account?</Link>
-            <div id = "message">
 
-            </div>
             </Card>
             </div>
         </div>
