@@ -20,4 +20,7 @@ public interface PartyDao {
     int getIdByUserId(String userId);
     //Do we need to retrieve a list of parties?
     //Do we need to CRUD parties?
+
+    boolean setInviteLinkByGroupId(int groupId);
+
 }

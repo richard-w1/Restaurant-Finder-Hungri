@@ -7,6 +7,8 @@ import com.techelevator.model.Restaurant;
 import com.techelevator.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -24,6 +26,8 @@ public class JdbcPartyDao implements PartyDao {
     private final Logger log = LoggerFactory.getLogger(JdbcPartyDao.class);
 
     private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    ServerProperties serverProperties;
 
     public JdbcPartyDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -96,27 +100,40 @@ public class JdbcPartyDao implements PartyDao {
             return groupMembersList;
         }
 
-    public int getIdByUserId(String userId){
-        String sql = "SELECT * FROM users WHERE username = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-        if(results.next()){
-            return results.getInt("user_id");
+        @Override
+        public int getIdByUserId(String userId){
+            String sql = "SELECT * FROM users WHERE username = ?";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            if(results.next()){
+                return results.getInt("user_id");
+            }
+            return 0;
         }
-        return 0;
-    }
+
+        @Override
+        public boolean setInviteLinkByGroupId(int groupId) {
+            String sql =
+                    "update groups " +
+                    "set invite_link = ? " +
+                    "WHERE group_id = ?";
+
+            jdbcTemplate.update(sql, "localhost:" + serverProperties.getPort() + "/party/" + groupId + "/invite", groupId);
+            return true;
+        }
 
 
 
-    private Party mapRowToParty(SqlRowSet rs) {
-        Party party = new Party();
-        party.setId(rs.getInt("group_id"));
-        party.setHostId(rs.getInt("user_id"));
-        party.setName(rs.getString("event_name"));
-        party.setEndDate(rs.getTimestamp("end_date"));
-        party.setHasEnded(rs.getBoolean("has_ended"));
-        party.setLocation(rs.getString("location"));
-        return party;
-    }
+        private Party mapRowToParty(SqlRowSet rs) {
+            Party party = new Party();
+            party.setId(rs.getInt("group_id"));
+            party.setHostId(rs.getInt("user_id"));
+            party.setName(rs.getString("event_name"));
+            party.setEndDate(rs.getTimestamp("end_date"));
+            party.setHasEnded(rs.getBoolean("has_ended"));
+            party.setLocation(rs.getString("location"));
+            party.setInviteLink(rs.getString("invite_link"));
+            return party;
+        }
 
 
 }

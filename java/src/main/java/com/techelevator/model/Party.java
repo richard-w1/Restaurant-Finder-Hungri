@@ -10,6 +10,7 @@ public class Party {
     private int hostId;
     private String location;
     private String userId;
+    private String inviteLink;
 
     public int getId() {
         return id;
@@ -65,5 +66,13 @@ public class Party {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getInviteLink() {
+        return inviteLink;
+    }
+
+    public void setInviteLink(String inviteLink) {
+        this.inviteLink = inviteLink;
     }
 }
