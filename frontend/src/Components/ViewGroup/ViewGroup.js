@@ -58,7 +58,7 @@ class ViewGroup extends Component {
             <div class = 'input'>
                 <h1 class = 'header'>Your invitations</h1>
                 <div id="group_list">
-                {groupInfo}
+                {groupInfo} 
                 </div>
                 <Link to="/CreateGroup">
                     <button renderAs="button">
