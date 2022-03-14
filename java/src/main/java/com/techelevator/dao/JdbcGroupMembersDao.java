@@ -35,7 +35,7 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 
     @Override
     public boolean addToParty(User user, int groupId) {
-        int validation = checkIfUserInGroupExists(user.getId().intValue(), groupId);
+        int validation = checkIfUserInGroupExists(user.getUsername(), groupId);
 
         if(validation == 1) {
             System.out.println("User " + user.getUsername() + " is already in this group: " + groupId);
@@ -78,10 +78,10 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 //    }
 
     @Override
-    public int checkIfUserInGroupExists(int userId, int groupId) {
-        String sql = "SELECT * FROM group_members WHERE member_id = ? AND group_id = ?";
+    public int checkIfUserInGroupExists(String memberName, int groupId) {
+        String sql = "SELECT * FROM group_members WHERE member_name = ? AND group_id = ?";
 
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId, groupId);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, memberName, groupId);
 
         if(result.next()){
             return 1;

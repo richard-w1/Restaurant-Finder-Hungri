@@ -69,7 +69,7 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
 
     @Override
     public boolean addMemberVotes(GroupMembers groupMembers) {
-        int validation = groupMembersDao.checkIfUserInGroupExists(groupMembers.getMember_id(), groupMembers.getGroup_id());
+        int validation = groupMembersDao.checkIfUserInGroupExists(groupMembers.getMember_name(), groupMembers.getGroup_id());
 
         if (validation == 1) {
             List<RestaurantGroup> restaurantList = new ArrayList<>();

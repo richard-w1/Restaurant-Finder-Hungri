@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.*;
 import com.techelevator.model.*;
-import com.techelevator.service.FindGroupMembersResponse;
-import com.techelevator.service.FindRestaurantGroupResponse;
-import com.techelevator.service.FindPartyResponse;
-import com.techelevator.service.FindRestaurantResponse;
+import com.techelevator.service.*;
 import com.techelevator.security.jwt.TokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @CrossOrigin("http://localhost:3000")
 //@PreAuthorize("hasRole('ROLE_USER')")
@@ -94,7 +94,8 @@ public class RestaurantTinderController {
     //Party invite link set to each groupId, when clicked add User into group as group member
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/party/{groupId}/invite", method = RequestMethod.POST)
-    public void addGroupMember(@PathVariable int groupId, @RequestBody User user) {
+    public void addGroupMember(@PathVariable int groupId, Principal principal, User user) {
+        user.setUsername(principal.getName());
         groupMembersDao.addToParty(user, groupId);
     }
 
@@ -134,4 +135,5 @@ public class RestaurantTinderController {
         FindGroupMembersResponse findGroupMembersResponse = new FindGroupMembersResponse();
         restaurantGroupDao.addMemberVotes(findGroupMembersResponse.getGroupMember());
     }
+
 }

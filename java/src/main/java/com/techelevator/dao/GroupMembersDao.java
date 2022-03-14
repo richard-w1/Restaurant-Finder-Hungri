@@ -27,7 +27,7 @@ public interface GroupMembersDao {
 //    GroupMembers vote(int member_id, int group_id, int user_vote);
     //restaurant
 
-    int checkIfUserInGroupExists(int userId, int groupId);
+    int checkIfUserInGroupExists(String memberName, int groupId);
 
 
 
