@@ -25,12 +25,9 @@ class Home extends Component {
             <div class="input"  >
                 <h1 class='header'>You Must Be Hungri!</h1>
                 <p className={classes.tagline}>Find Food And Grab A Bite With Friends</p>
-                <img src="src/Pictures/FoodBanner.png" alt="MMMMMM Yummy Yummy " />
-                
-
+                <img src="../public/images/FoodBanner.png" alt="MMMMMM Yummy Yummy " />
 
                 <div className={classes.logincard}>
-
 
                     {/* <span><a class="button" href="/SearchForm" >Search Restaurants</a></span>
                     <span><a class="button" href="/CreateGroup" >Create an Invitation</a></span>
