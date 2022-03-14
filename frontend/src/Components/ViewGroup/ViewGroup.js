@@ -6,6 +6,8 @@ import {withRouter} from 'react-router-dom'
 import {addToken, addUser} from '../../Redux/actionCreators'
 import {baseUrl} from '../../Shared/baseUrl'
 import axios from 'axios'
+import classes from './ViewGroup.module.css'
+import '../../style.css'
 
 class ViewGroup extends Component {
 
@@ -20,9 +22,7 @@ class ViewGroup extends Component {
 
     handleSearch = async () => {
         this.displaySearch = false;
-        console.log(this.props.token);
         var response = axios.get(baseUrl + "/find_groups/" + encodeURI(this.props.token));
-        console.log((await response).data.parties);
         this.state = {
             groups: (await response).data.parties
         }
@@ -42,21 +42,26 @@ class ViewGroup extends Component {
         if (this.state.groups.length > 0){
             groupInfo = "<ul>";
             for (var i = 0; i < this.state.groups.length; i++){
-                groupInfo += "<li>" + this.state.groups[i].name + "</li>"
+                groupInfo += "<div class = 'listofgroup'>";
+                groupInfo += "<p><h3>" + this.state.groups[i].name + "</h3></p>"
+                groupInfo += "<p>" + this.state.groups[i].location + "</p>"
+                groupInfo += "<p>Voting Ends: " + this.state.groups[i].endDate + "</p>"
+                groupInfo += "<p>Invite Link: " + this.state.groups[i].inviteLink + "</p>"
+                groupInfo += "<p><Link to='/Party/" + this.state.groups[i].id + "'><button renderAs='button'><span>View Invitation</span></button></Link><p>"
+                groupInfo += "</div>";
+                groupInfo += "<hr>"
             }
             groupInfo += "</ul>";
         }
-        console.log(groupInfo);
         return groupInfo;
     }
 
     render(){
         this.handleSearch();
-        console.log(this.state);
         const groupInfo = this.generateList();
         return(
             <div class = 'input'>
-                <h1 class = 'header'>Your invitations</h1>
+                <h1 class = 'header'>Your Invitations</h1>
                 <div id="group_list">
                 {groupInfo} 
                 </div>
