@@ -12,6 +12,7 @@ import { addToken, deleteUser } from '../../Redux/actionCreators'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Header from '../UI/Header';
+import Party from '../Party/Party.js';
 
 
 const mapStateToProps = state => {
@@ -50,7 +51,8 @@ class Main extends Component {
                     <Route path='/SearchForm' component={() => <SearchForm />} />
                     <Route path='/CreateGroup' component={() => <CreateGroup token={this.props.token.token} />} />
                     <Route path='/ViewGroup' component={() => <ViewGroup token={this.props.token.token} />} />
-                    <Route path='/Splash' component={() => <Splash />} />
+                    <Route path='/Splash' component={() => <Splash/>} />
+                    <Route path='/Party' component={() => <Party/>} />
                     <Redirect to='/Splash' />
                 </Switch>
             </div>
