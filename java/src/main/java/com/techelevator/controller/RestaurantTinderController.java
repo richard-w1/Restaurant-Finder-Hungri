@@ -116,7 +116,7 @@ public class RestaurantTinderController {
     @RequestMapping(value = "/party/{groupId}/restaurants", method = RequestMethod.GET)
     public ResponseEntity<FindRestaurantResponse> getPartyRestaurants(@PathVariable int groupId) {
         FindRestaurantResponse findRestaurantResponse = new FindRestaurantResponse();
-        findRestaurantResponse.setRestaurants(restaurantDao.findRestaurant(partyDao.findPartyById(groupId).getLocation()));
+        findRestaurantResponse.setRestaurants(restaurantDao.getRestaurantByGroupId(groupId));
         return new ResponseEntity<>(findRestaurantResponse, null, HttpStatus.OK);
     }
     //Retrieve party members
@@ -132,9 +132,11 @@ public class RestaurantTinderController {
     //Voting page for party, click button to open vote page
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/party/{groupId}/vote", method = RequestMethod.POST)
-    public void addUserVotesToDatabase(@PathVariable int groupId, @RequestBody List<GroupMembers> groupMembers) {
+    public ResponseEntity<VoteResponse> addUserVotesToDatabase(@PathVariable int groupId, @RequestBody GroupMembers groupMembers) {
+        VoteResponse voteResponse = new VoteResponse();
 
-        restaurantGroupDao.addMemberVotes(groupId, groupMembers);
+        voteResponse.setTotalVote(restaurantGroupDao.addMemberVotes(groupId, groupMembers));
+        return new ResponseEntity<>(voteResponse, null, HttpStatus.OK);
     }
 
 }

@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Header from '../UI/Header';
 import Group from '../Group/Group.js';
-
+import Restaurant from '../Restaurant/Restaurant';
 
 const mapStateToProps = state => {
     return {
@@ -52,7 +52,7 @@ class Main extends Component {
                     <Route path='/CreateGroup' component={() => <CreateGroup token={this.props.token.token} />} />
                     <Route path='/ViewGroup' component={() => <ViewGroup token={this.props.token.token} />} />
                     <Route path='/Splash' component={() => <Splash/>} />
-                    <Route path='/Group' component={() => <Group/>} />
+                    <Route path='/Group' component={Group} />
                     <Redirect to='/Splash' />
                 </Switch>
             </div>

@@ -30,6 +30,22 @@ public class JdbcRestaurantDao implements RestaurantDao {
 
     }
 
+    @Override
+    public List<Restaurant> getRestaurantByGroupId(int groupId){
+        List<Restaurant> restaurant = new ArrayList<>();
+        String sql = "SELECT restaurants.*, restaurant_group.total_votes FROM public.restaurants left outer join public.restaurant_group on \n" +
+                "                restaurants.restaurant_id = restaurant_group.restaurant_id WHERE restaurant_group.group_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, groupId);
+        while(results.next()) {
+            restaurant.add(mapRowToRestaurantVote(results));
+        }
+        return restaurant;
+    }
+    private Restaurant mapRowToRestaurantVote(SqlRowSet rs) {
+        Restaurant rtn = mapRowToRestaurant(rs);
+        rtn.setVote(rs.getInt("total_votes"));
+        return rtn;
+    }
     private Restaurant mapRowToRestaurant(SqlRowSet rs) {
         Restaurant restaurant = new Restaurant();
         restaurant.setRestaurantId(rs.getInt("restaurant_id"));

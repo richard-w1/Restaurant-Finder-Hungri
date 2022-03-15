@@ -9,6 +9,7 @@ import axios from 'axios'
 import '../../style.css'
 import Card from '../UI/Card'
 import './SearchForm.css'
+import Restaurant from '../Restaurant/Restaurant.js'
 
 class SearchForm extends Component {
 
@@ -17,7 +18,7 @@ class SearchForm extends Component {
         this.displaySearch = true;
         this.state = {
             location: '',
-            restaurants: ''
+            restaurants: []
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     };
@@ -68,20 +69,22 @@ class SearchForm extends Component {
         restaurant += "<hr>";
         });
         restaurant += "</ul>";
-        document.getElementById('results').innerHTML = restaurant
+        //document.getElementById('results').innerHTML = restaurant
     }
 
 
     handleInputChange = (event) => {
         event.preventDefault()
         this.setState({
-            [event.target.name]: event.target.value
+            location: event.target.value,
+            restaurants: this.state.restaurants
         })
     }
 
 
     render() {
-        if (this.displaySearch) {
+        
+
             return (
                 <div class="input">
                     <h1 class='header' >Search Restaurants</h1>
@@ -97,48 +100,18 @@ class SearchForm extends Component {
                         required
                     />
                     <button type='submit' onClick={this.handleSearch}>Search</button>
-                    <div id="results">
-
-                    </div>
+                        {
+                        console.log("# of Res: " + this.state.restaurants)}
+                    {
+                        this.state.restaurants.map(
+                            (d, index)=>{
+                                return <Restaurant restaurant = {d}/>
+                            }                        
+                        )
+                    }
                 </div>
 
             );
-        }
-        else {
-
-            console.log(this.state.restaurants)
-
-            return (
-                <div>
-                    <div class="input">
-                        <h1 class='header'>Search Restaurants</h1>
-                        <label class="sr-only">Enter City or Zip Code</label>
-                        <input
-                            type='text'
-                            id="location"
-                            name="location"
-                            class="form-control"
-                            v-model="user.username"
-                            placeholder='Enter City or Zip Code'
-                            onChange={this.handleInputChange}
-                            required
-                        />
-                        <button type='submit' onClick={this.handleSearch}>Search</button>
-
-                        <div id = 'results'></div>
-
-                        <div>
-                            <Link to="/SearchForm">
-                                <button renderAs="button">
-                                    <span>Back to Search</span>
-                                </button>
-                            </Link>
-                        </div>
-
-                    </div>
-                </div>
-            )
-        }
 
     }
 }

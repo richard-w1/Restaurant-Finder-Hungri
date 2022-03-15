@@ -8,4 +8,5 @@ public interface RestaurantDao {
 
     List<Restaurant> findRestaurant(String location);
 
+    List<Restaurant> getRestaurantByGroupId(int groupId);
 }

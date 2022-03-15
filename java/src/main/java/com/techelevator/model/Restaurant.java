@@ -14,6 +14,7 @@ public class Restaurant {
     private int rating;
     private String city;
     private int zipCode;
+    private int vote;
 
     public int getRestaurantId() {
         return restaurantId;
@@ -91,5 +92,13 @@ public class Restaurant {
 
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public int getVote() {
+        return vote;
+    }
+
+    public void setVote(int vote) {
+        this.vote = vote;
     }
 }

@@ -1,6 +1,8 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -18,12 +20,14 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
     public RestaurantGroupDao restaurantGroupDao;
     public GroupMembersDao groupMembersDao;
     private final JdbcTemplate jdbcTemplate;
+    private final Logger log = LoggerFactory.getLogger(JdbcRestaurantGroupDao.class);
 
     public JdbcRestaurantGroupDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public boolean addDataToRestaurantGroup(Party party) {
+
         String sql = "insert into restaurant_group (group_id, restaurant_id)\n" +
                 "select group_id, restaurant_id from groups\n" +
                 "join restaurants ON restaurants.city = groups.location\n" +
@@ -68,27 +72,31 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
 //    }
 
     @Override
-    public boolean addMemberVotes(int groupId, List<GroupMembers> groupMembers) {
+    public int addMemberVotes(int groupId, GroupMembers groupMember) {
         //int validation = groupMembersDao.checkIfUserInGroupExists(groupMembers.getMember_id(), groupMembers.getGroup_id());
 
         //if (validation == 1) {
 //            List<RestaurantGroup> restaurantList = new ArrayList<>();
 //            restaurantList = restaurantGroupDao.getRestaurantIdsByGroupId(groupMembers.getGroup_id());
 
+        log.info("Group Id: " +groupId);
+        log.info("Res Id: " +groupMember.getRestaurantId() + " vote: " + groupMember.getUserVote());
 
-                for (GroupMembers groupMember: groupMembers) {
                     if (groupMember.getUserVote() == 1) {
                         String sql = "update restaurant_group set total_votes = total_votes + 1 where group_id = ? and restaurant_id = ?";
-                        jdbcTemplate.update(sql, groupMember.getGroupId(), getRestaurantIdsByGroupId(groupId));
+                        jdbcTemplate.update(sql, groupId, groupMember.getRestaurantId());
                     } else if (groupMember.getUserVote() == -1) {
                         String sql = "update restaurant_group set total_votes = total_votes - 1 where group_id = ? and restaurant_id = ?";
-                        jdbcTemplate.update(sql, groupMember.getGroupId(), getRestaurantIdsByGroupId(groupId));
+                        jdbcTemplate.update(sql, groupId, groupMember.getRestaurantId());
                     } else {
                         System.out.println("Invalid vote value.");
                     }
-                }
-                //Success
-                return true;
+                        String sql2 = "select total_votes from restaurant_group where group_id = ? and restaurant_id = ?";
+                        SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, groupId, groupMember.getRestaurantId());
+                    if (results.next()){
+                        return results.getInt(1);
+                    } else return 0;
+        //Success
 //        } else {
 //            System.out.println("You are not a member of this party.");
 //            //Fail

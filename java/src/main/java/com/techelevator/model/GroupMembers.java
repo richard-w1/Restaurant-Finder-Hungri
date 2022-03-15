@@ -9,6 +9,7 @@ public class GroupMembers {
         private String memberName;
         private int groupId;
         private int userVote;
+        private int restaurantId;
 
     public int getMemberId() {
         return memberId;
@@ -40,5 +41,13 @@ public class GroupMembers {
 
     public void setUserVote(int userVote) {
         this.userVote = userVote;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 }

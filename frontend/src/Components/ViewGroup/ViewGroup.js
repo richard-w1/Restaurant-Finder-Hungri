@@ -18,6 +18,7 @@ class ViewGroup extends Component {
         this.state = {
             groups: []
         }
+        console.log(this.state);
         this.handleSearch();
     };
 
@@ -50,7 +51,7 @@ class ViewGroup extends Component {
                                 <p>{ele.location}</p>
                                 <p>Voting Ends: {ele.endDate}</p>
                                 <p>Invite Link: {ele.inviteLink}</p>
-                                <p><Link to={{pathname:'/Group', state: ele.id}}><button renderAs='button'><span>View Invitation</span></button></Link></p>
+                                <p><Link to={{pathname:'/Group', invite:ele}}><button renderAs='button'><span>View Invitation</span></button></Link></p>
                                 <hr></hr>
                                 </div>
                                 
