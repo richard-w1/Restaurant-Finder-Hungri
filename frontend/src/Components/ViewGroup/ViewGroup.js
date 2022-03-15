@@ -47,7 +47,7 @@ class ViewGroup extends Component {
                 groupInfo += "<p>" + this.state.groups[i].location + "</p>"
                 groupInfo += "<p>Voting Ends: " + this.state.groups[i].endDate + "</p>"
                 groupInfo += "<p>Invite Link: " + this.state.groups[i].inviteLink + "</p>"
-                groupInfo += "<p><Link to='/Party/" + this.state.groups[i].id + "'><button renderAs='button'><span>View Invitation</span></button></Link><p>"
+                groupInfo += "<p><Link to='/Group/" + this.state.groups[i].id + "'><button renderAs='button'><span>View Invitation</span></button></Link><p>"
                 groupInfo += "</div>";
                 groupInfo += "<hr>"
             }
