@@ -94,10 +94,10 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 
     private GroupMembers mapRowToGroupMembers(SqlRowSet rs) {
         GroupMembers groupMembers = new GroupMembers();
-        groupMembers.setMember_id(rs.getInt("member_id"));
-        groupMembers.setMember_name(rs.getString("member_name"));
-        groupMembers.setGroup_id(rs.getInt("group_id"));
-        groupMembers.setUser_vote(rs.getInt("user_vote"));
+        groupMembers.setMemberId(rs.getInt("member_id"));
+        groupMembers.setMemberName(rs.getString("member_name"));
+        groupMembers.setGroupId(rs.getInt("group_id"));
+        groupMembers.setUserVote(rs.getInt("user_vote"));
 
         return groupMembers;
     }
