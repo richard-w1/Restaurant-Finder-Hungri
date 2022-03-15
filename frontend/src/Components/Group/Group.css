@@ -1,0 +1,11 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #F4EDE5;
+    align-items: center;
+    height: 100%;
+    margin-left: 200px;
+    margin-right: 200px;
+    min-height: 100vh;
+  }
