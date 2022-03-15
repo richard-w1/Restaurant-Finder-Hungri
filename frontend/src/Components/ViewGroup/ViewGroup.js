@@ -18,52 +18,46 @@ class ViewGroup extends Component {
         this.state = {
             groups: []
         }
+        this.handleSearch();
     };
 
     handleSearch = async () => {
         this.displaySearch = false;
         var response = axios.get(baseUrl + "/find_groups/" + encodeURI(this.props.token));
-        this.state = {
-            groups: (await response).data.parties
-        }
-        document.getElementById("group_list").innerHTML = this.generateList()
-        console.log(this.state);
+        this.setState({
+            groups:  (await response).data.parties
+        })
     }
 
 
     handleInputChange = (event) => {
         event.preventDefault()
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-    generateList(){
-        var groupInfo = "No invitations found, invite some friends!";
-        if (this.state.groups.length > 0){
-            groupInfo = "<ul>";
-            for (var i = 0; i < this.state.groups.length; i++){
-                groupInfo += "<div class = 'listofgroup'>";
-                groupInfo += "<p><h3>" + this.state.groups[i].name + "</h3></p>"
-                groupInfo += "<p>" + this.state.groups[i].location + "</p>"
-                groupInfo += "<p>Voting Ends: " + this.state.groups[i].endDate + "</p>"
-                groupInfo += "<p>Invite Link: " + this.state.groups[i].inviteLink + "</p>"
-                groupInfo += "<p><Link to='/Group/" + this.state.groups[i].id + "'><button renderAs='button'><span>View Invitation</span></button></Link><p>"
-                groupInfo += "</div>";
-                groupInfo += "<hr>"
-            }
-            groupInfo += "</ul>";
-        }
-        return groupInfo;
     }
 
+
     render(){
-        this.handleSearch();
-        const groupInfo = this.generateList();
         return(
             <div class = 'input'>
                 <h1 class = 'header'>Your Invitations</h1>
+                
                 <div id="group_list">
-                {groupInfo} 
+                    {
+                        this.state.groups.map(
+                            (ele, index)=>{
+                                console.log(ele.name);
+                                return <div class = 'listofgroup'>
+                                <p><h3>{ele.name}</h3></p>
+                                <p>{ele.location}</p>
+                                <p>Voting Ends: {ele.endDate}</p>
+                                <p>Invite Link: {ele.inviteLink}</p>
+                                <p><Link to={{pathname:'/Group', state: ele.id}}><button renderAs='button'><span>View Invitation</span></button></Link></p>
+                                <hr></hr>
+                                </div>
+                                
+                    
+                            }
+                        )
+                    }
                 </div>
                 <Link to="/CreateGroup">
                     <button renderAs="button">

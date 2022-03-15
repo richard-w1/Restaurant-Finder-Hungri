@@ -117,7 +117,7 @@ public class JdbcPartyDao implements PartyDao {
                     "set invite_link = ? " +
                     "WHERE group_id = ?";
 
-            jdbcTemplate.update(sql, "localhost:" + serverProperties.getPort() + "/group/" + groupId + "/invite", groupId);
+            jdbcTemplate.update(sql, "localhost:" + serverProperties.getPort() + "/party/" + groupId + "/invite", groupId);
             return true;
         }
 
