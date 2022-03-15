@@ -5,31 +5,40 @@ import java.util.HashMap;
 
 public class GroupMembers {
 
-        private int member_id;
-        private String member_name;
-        private int group_id;
-        private int user_vote;
+        private int memberId;
+        private String memberName;
+        private int groupId;
+        private int userVote;
 
-
-    public int getMember_id() {return member_id;}
-
-    public void setMember_id(int member_id) {this.member_id = member_id;}
-
-    public String getMember_name() {return member_name;}
-
-    public void setMember_name(String member_name) {this.member_name = member_name;}
-
-
-
-    public int getGroup_id() {return group_id;}
-
-    public void setGroup_id(int group_id) {this.group_id = group_id;}
-
-    public int getUser_vote() {
-        return user_vote;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setUser_vote(int user_vote) {
-        this.user_vote = user_vote;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getUserVote() {
+        return userVote;
+    }
+
+    public void setUserVote(int userVote) {
+        this.userVote = userVote;
     }
 }

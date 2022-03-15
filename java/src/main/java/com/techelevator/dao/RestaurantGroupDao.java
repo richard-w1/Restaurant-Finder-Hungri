@@ -12,7 +12,7 @@ public interface RestaurantGroupDao {
 
 //    GroupMembers vote(int member_id, int group_id, int user_vote, int restaurantId);
 
-    boolean addMemberVotes(GroupMembers groupMembers);
+    boolean addMemberVotes(int groupId, List<GroupMembers> groupMembers);
 
     boolean initSetTotalVotes(int groupId);
 

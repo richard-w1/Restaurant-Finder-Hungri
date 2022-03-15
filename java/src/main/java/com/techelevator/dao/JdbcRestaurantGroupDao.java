@@ -68,32 +68,32 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
 //    }
 
     @Override
-    public boolean addMemberVotes(GroupMembers groupMembers) {
-        int validation = groupMembersDao.checkIfUserInGroupExists(groupMembers.getMember_name(), groupMembers.getGroup_id());
+    public boolean addMemberVotes(int groupId, List<GroupMembers> groupMembers) {
+        //int validation = groupMembersDao.checkIfUserInGroupExists(groupMembers.getMember_id(), groupMembers.getGroup_id());
 
-        if (validation == 1) {
-            List<RestaurantGroup> restaurantList = new ArrayList<>();
-            restaurantList = restaurantGroupDao.getRestaurantIdsByGroupId(groupMembers.getGroup_id());
+        //if (validation == 1) {
+//            List<RestaurantGroup> restaurantList = new ArrayList<>();
+//            restaurantList = restaurantGroupDao.getRestaurantIdsByGroupId(groupMembers.getGroup_id());
 
 
-                for (RestaurantGroup restaurantGroup : restaurantList) {
-                    if (groupMembers.getUser_vote() == 1) {
+                for (GroupMembers groupMember: groupMembers) {
+                    if (groupMember.getUserVote() == 1) {
                         String sql = "update restaurant_group set total_votes = total_votes + 1 where group_id = ? and restaurant_id = ?";
-                        jdbcTemplate.update(sql, groupMembers.getGroup_id(), restaurantGroup.getRestaurantId());
-                    } else if (groupMembers.getUser_vote() == -1) {
+                        jdbcTemplate.update(sql, groupMember.getGroupId(), getRestaurantIdsByGroupId(groupId));
+                    } else if (groupMember.getUserVote() == -1) {
                         String sql = "update restaurant_group set total_votes = total_votes - 1 where group_id = ? and restaurant_id = ?";
-                        jdbcTemplate.update(sql, groupMembers.getGroup_id(), restaurantGroup.getRestaurantId());
+                        jdbcTemplate.update(sql, groupMember.getGroupId(), getRestaurantIdsByGroupId(groupId));
                     } else {
                         System.out.println("Invalid vote value.");
                     }
                 }
                 //Success
                 return true;
-        } else {
-            System.out.println("You are not a member of this party.");
-            //Fail
-            return false;
-        }
+//        } else {
+//            System.out.println("You are not a member of this party.");
+//            //Fail
+//            return false;
+//        }
     }
 
     @Override

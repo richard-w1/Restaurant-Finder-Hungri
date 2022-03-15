@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 //@PreAuthorize("hasRole('ROLE_USER')")
@@ -94,8 +95,8 @@ public class RestaurantTinderController {
     //Party invite link set to each groupId, when clicked add User into group as group member
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/party/{groupId}/invite", method = RequestMethod.POST)
-    public void addGroupMember(@PathVariable int groupId, Principal principal, User user) {
-        user.setUsername(principal.getName());
+    public void addGroupMember(@PathVariable int groupId, @RequestBody User user) {
+
         groupMembersDao.addToParty(user, groupId);
     }
 
@@ -131,9 +132,9 @@ public class RestaurantTinderController {
     //Voting page for party, click button to open vote page
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/party/{groupId}/vote", method = RequestMethod.POST)
-    public void addUserVotesToDatabase(@PathVariable int groupId) {
-        FindGroupMembersResponse findGroupMembersResponse = new FindGroupMembersResponse();
-        restaurantGroupDao.addMemberVotes(findGroupMembersResponse.getGroupMember());
+    public void addUserVotesToDatabase(@PathVariable int groupId, @RequestBody List<GroupMembers> groupMembers) {
+
+        restaurantGroupDao.addMemberVotes(groupId, groupMembers);
     }
 
 }
