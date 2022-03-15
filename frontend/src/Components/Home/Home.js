@@ -31,7 +31,7 @@ class Home extends Component {
                         </Link>
                     </div>
                     <div className={classes.card}>
-                        <p className={classes.p}>Inivite Friends and Share a Meal</p>
+                        <p className={classes.p}>Invite Friends and Share a Meal</p>
                         <Link to="/CreateGroup">
                             <button class="button2">
                                 <span>Create an Invitation</span>
@@ -39,7 +39,7 @@ class Home extends Component {
                         </Link>
                     </div>
                     <div className={classes.card}>
-                        <p className={classes.p}>Ready to Choose Your Restaurant? Check Your Group Status</p>
+                        <p className={classes.p}>Ready to Choose Your Restaurant? Check Your Groups Status</p>
                         <Link to="/ViewGroup">
                             <button class="button2">
                                 <span>See Your Existing Invitations</span>
