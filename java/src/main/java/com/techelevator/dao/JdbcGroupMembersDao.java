@@ -35,11 +35,6 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
 
     @Override
     public boolean addToParty(User user, int groupId) {
-        int validation = checkIfUserInGroupExists(user.getUsername(), groupId);
-
-        if(validation == 1) {
-            System.out.println("User " + user.getUsername() + " is already in this group: " + groupId);
-        } else {
             String id_column = "member_id";
             String sql = "INSERT INTO group_members (member_id, member_name, group_id, user_vote) VALUES (?, ?, ?, ?)";
             int added = jdbcTemplate.update(connection -> {
@@ -50,7 +45,6 @@ public class JdbcGroupMembersDao implements GroupMembersDao {
                 ps.setInt(4, 0);
                 return ps;
             });
-        }
         return true;
     }
 
