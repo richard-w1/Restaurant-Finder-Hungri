@@ -27,9 +27,9 @@ public class JdbcRestaurantGroupDao implements RestaurantGroupDao {
         String sql = "insert into restaurant_group (group_id, restaurant_id)\n" +
                 "select group_id, restaurant_id from groups\n" +
                 "join restaurants ON restaurants.city = groups.location\n" +
-                "where group_id = ? AND restaurants.city = ?";
+                "where group_id = ? AND (restaurants.city = ? OR restaurants.zip_code = ?)";
 
-        jdbcTemplate.update(sql, party.getId(), party.getLocation());
+        jdbcTemplate.update(sql, party.getId(), party.getLocation(), party.getLocation());
 
         return true;
     }
