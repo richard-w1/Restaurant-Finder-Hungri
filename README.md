@@ -7,15 +7,15 @@ As this application is a proof of concept, some of the additional features that 
 
 # How to use
 
-Run java/database/new_schema.sql to set up the database.
+1. Run java/database/new_schema.sql to set up the database.
 
-java/database/restaurants.sql includes mock data for example restaurants but you can insert your own into the database.
+2. Run java/database/restaurants.sql to include mock data for example restaurants. You can insert your own into the database.
 
-Run java/src/main/java/com/techelevator/Application.java to start the server.
+3. Run java/src/main/java/com/techelevator/Application.java to start the server.
 
-The server should be hosted on http://localhost:3000/
+4. The server should be hosted on http://localhost:3000/
 
-From the splash page you can create your Username and Password, and filter restaurants in the database by location, as well other features.
+5. Congratulations! From the splash page you can create your Username and Password, and filter restaurants in the database by location, as well other features.
 
 # Credits
 
